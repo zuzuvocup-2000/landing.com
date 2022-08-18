@@ -35,7 +35,7 @@ $model = new App\Models\AutoloadModel();
     </section>
     <!--End Home-->
     <!-- Start About -->
-    <section class="section bg-light">
+    <section class="section bg-light" id="about-us">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
