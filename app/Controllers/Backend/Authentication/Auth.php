@@ -39,6 +39,7 @@ class Auth extends BaseController{
 		 			// 'permission' => base64_encode($user['permission']),
 		 		];
 		 		$permission = [];
+		 		$_SESSION['permission'] = $user['permission'];
 		 		if(isset($user['permission']) && is_array($user['permission']) && count($user['permission'])){
 		 			foreach ($user['permission'] as $value) {
 		 			    if($value == 'All' || $value == 'folderView' || $value == 'folderCreate' || $value == 'folderRename' || $value == 'folderDelete' || $value == 'fileView' || $value == 'fileUpload' || $value == 'fileRename' || $value == 'fileDelete'){

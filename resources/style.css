@@ -1256,7 +1256,9 @@ button:focus {
     border: 1px solid #eaeaea;
 }
 .blog_bor_boxes .blog_content .blog_user img {
-    width: 60px;
+    width: 80px;
+    object-fit: cover;
+    height: 80px;
 }
 .blog_bor_boxes .blog_content .blog_user .media-body h5 {
     font-size: 17px;
@@ -1839,160 +1841,70 @@ button:focus {
     display: inline-block;
     padding: 0.2em 0;
 }
-.login,
-.forgot,
-.register{
-  padding: 50px 50px 20px 50px;
-}
-.register{
-  display: none;
-}
-.forgot{
-  display: none;
-}
-.login .heading-1,
-.forgot .heading-1,
-.register .heading-1{
-  text-align: center;
-  font-family: "Work Sans";
-  line-height: 1;
-  font-weight: bold;
-  font-size: 32px;
-  margin-bottom: 30px;
-}
-.login  .loginfor:not(:last-child){
-  margin-bottom: 20px;
-}
-.login  .loginfor{
-  position: relative;
-}
-.login  .loginfor a{
-  display: block;
-  padding: 15px 30px;
-  text-align: center;
-  border: 1px solid rgb(227 225 228);
-  color: rgb(22, 24, 35);
-}
-  .loginfor:nth-child(2) i{
-  left: 6%;;
-}
- .loginfor:nth-child(5) i{
-  left: 5%;;
-}
- .loginfor i{
-  position: absolute;
-  top: 21%;
-  left: 5%;
-  font-size: 35px;
-}
-.login-foot{
-  border-top: 1px solid rgb(227 225 228);
-  text-align: center;
-  padding: 20px 0;
-}
-.btn-register a{
-  color: rgb(254, 44, 85);
-}
-.btn-forgot{
-  display: none;
-}
-.btn-forgot a{
-  color: rgb(254, 44, 85);
-}
-.btn-login2{
-  display: none;
-}
-.btn-login2 a{
-  color: rgb(254, 44, 85);
-}
-.uk-open .uk-modal-dialog {
-  padding: 0;
-}
-.login-form{
-  display: none;
-}
-.login-form {
-  padding: 0 50px;
-}
-.login-form  input{
-  width: 100%;
-  border: 1px solid rgb(227 225 228);
-  height: 50px;
-  background: rgba(241, 241, 242, 1);
-  border-radius: 5px;
-}
-.forgot-form{
-  margin-bottom: 30px;
-}
-.forgot-form  input[type="submit" i]{
-    cursor: pointer;
-    position: absolute;
-    width: 80px;
-    right: 0;
-    top: 29px;
+
+.login-member-profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
     text-align: center;
-    color: rgba(176,176,202,1);
-    background: white;
-}
-.forgot-form  .wrap-input{
-  position: relative;
-}
-.forgot-form {
-  padding: 0 50px;
-}
-.forgot-form  input{
-  width: 100%;
-  border: 1px solid rgb(227 225 228);
-  height: 50px;
-  background: rgba(241, 241, 242, 1);
-  border-radius: 5px;
-}
-.forgot-form  input{
-  width: 100%;
-  border: 1px solid rgb(227 225 228);
-  height: 50px;
-  background: rgba(241, 241, 242, 1);
-  border-radius: 5px;
-}
-.register-form  input{
-  width: 100%;
-  border: 1px solid rgb(227 225 228);
-  height: 50px;
-  background: rgba(241, 241, 242, 1);
-  border-radius: 5px;
-}
-.btn-login a{
-  border: 1px solid rgb(227 225 228);
-  background: rgba(241, 241, 242, 1);
-  color: #161823;
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-  height: 50px;
-  line-height: 50px;
-}
-.uk-modal-close.uk-close {
-    background: #fff url(../public/close.png) center no-repeat;
+    color: #fff;
+    border: 1px solid #fff;
+    line-height: 45px;
+    position: relative;
+    font-size: 25px;
 }
 
-.login-forgot-pass{
-  font-size: 12px;
-  color: #000;
+.list-action-member{
+    background: rgb(255, 255, 255);
+    border-radius: 8px;
+    top:  65px;
+    box-shadow: rgb(0 0 0 / 12%) 0px 4px 16px;
+    transition: opacity 300ms ease 0s;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    overflow: hidden;
+    right: 0;
+    width: 200px;
 }
 
-.back-to-form{
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  font-size: 30px;
-  line-height: 30px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.custom-nav.stickyadd .container-fluid .navbar-nav li a {
+.list-action-member li a{
     color: #000;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    transition: all ease-in-out 0.2s;
 }
+
+.list-action-member li a svg{
+    margin-right: 10px;
+}
+
+.list-action-member::after{
+    content: "";
+    bottom: 100%;
+
+    height: 30px;
+    background: transparent;
+    right: 0;
+    width: 100%;
+    position: absolute;
+}
+
+.list-action-member li:not(:last-child){
+    border-bottom: 1px solid rgba(22, 24, 35, 0.12);
+}
+.tamgiac {
+    display: block;
+    width: 24px;
+    height: 8px;
+    position: absolute;
+    top: -8px;
+}
+.login-member-profile:hover .list-action-member{
+    opacity: 1;
+    visibility: visible;
+}
+

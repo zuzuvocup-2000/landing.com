@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module>
-	<permissions>
+	<!-- <permissions>
 		<title>Nhóm - [Sản phẩm]</title>\
 		<item>
 			<param>backend/product/catalogue/index</param>
@@ -87,8 +87,8 @@
 			<param>backend/product/brand/brand/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
-	<permissions>
+	</permissions> -->
+	<!-- <permissions>
 		<title>Danh sách - [Voucher]</title>
 		<item>
 			<param>backend/product/voucher/index</param>
@@ -106,8 +106,8 @@
 			<param>backend/product/voucher/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
-	<permissions>
+	</permissions> -->
+	<!-- <permissions>
 		<title>Danh sách - [Cửa hàng]</title>
 		<item>
 			<param>backend/product/store/index</param>
@@ -163,7 +163,7 @@
 			<param>backend/landingpage/landingpage/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
+	</permissions> -->
 	<permissions>
 		<title>Nhóm - [Bài viết]</title>
 		<item>
@@ -202,7 +202,7 @@
 			<description>Xóa</description>
 		</item>
 	</permissions>
-	<permissions>
+	<!-- <permissions>
 		<title>Nhóm - [Nội dung tĩnh]</title>
 		<item>
 			<param>backend/page/catalogue/index</param>
@@ -277,8 +277,8 @@
 			<param>backend/media/media/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
-	<permissions>
+	</permissions> -->
+	<!-- <permissions>
 		<title>Nhóm - [Tài liệu]</title>
 		<item>
 			<param>backend/file/catalogue/index</param>
@@ -353,7 +353,7 @@
 			<param>backend/location/location/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
+	</permissions> -->
 	<permissions>
 		<title>Nhóm - [Thành viên]</title>
 		<item>
@@ -449,16 +449,16 @@
 			<param>backend/member/member/delete</param>
 			<description>Xóa</description>
 		</item>
-		<item>
+		<!-- <item>
 			<param>backend/bill/bill/index</param>
 			<description>Danh sách đơn hàng</description>
 		</item>
 		<item>
 			<param>backend/bill/bill/detail</param>
 			<description>Chi tiết đơn hàng</description>
-		</item>
+		</item> -->
 	</permissions>
-	<permissions>
+	<!-- <permissions>
 		<title>Thông tin - [Phí vận chuyển]</title>
 		<item>
 			<param>backend/price/price/index</param>
@@ -514,7 +514,7 @@
 			<param>backend/attribute/attribute/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
+	</permissions> -->
 	<permissions>
 		<title>Quản lý - [Liên hệ]</title>
 		<item>
@@ -534,7 +534,7 @@
 			<description>Xóa</description>
 		</item>
 	</permissions>
-	<permissions>
+	<!-- <permissions>
 		<title>Quản lý - [Comment]</title>
 		<item>
 			<param>backend/comment/comment/index</param>
@@ -552,7 +552,7 @@
 			<param>backend/comment/comment/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
+	</permissions> -->
 	<permissions>
 		<title>Quản lý - [Menu]</title>
 		<item>
@@ -618,11 +618,15 @@
 			<description>Xem toàn bộ</description>
 		</item>
 		<item>
+			<param>backend/system/system/store</param>
+			<description>Quản lý hệ thống</description>
+		</item>
+		<item>
 			<param>backend/system/general/translator</param>
 			<description>Xem bản dịch</description>
 		</item>
 	</permissions>
-	<permissions>
+	<!-- <permissions>
 		<title>Quản lý - Widget</title>
 		<item>
 			<param>backend/widget/widget/index</param>
@@ -636,8 +640,8 @@
 			<param>backend/widget/widget/store</param>
 			<description>Sửa Widget</description>
 		</item>
-	</permissions>
-	<permissions>
+	</permissions> -->
+	<!-- <permissions>
 		<title>Ngôn Ngữ</title>
 		<item>
 			<param>backend/language/language/index</param>
@@ -655,7 +659,7 @@
 			<param>backend/language/language/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
+	</permissions> -->
 	
 	<permissions>
 		<title>Quản lý - [Bản dịch]</title>
@@ -667,26 +671,26 @@
 			<param>backend/translate/translate/translateobject</param>
 			<description>Bản dịch bài viết</description>
 		</item>
-		<item>
+		<!-- <item>
 			<param>backend/translate/translate/translateproduct</param>
 			<description>Bản dịch sản phẩm</description>
 		</item>
 		<item>
 			<param>backend/translate/translate/translatetour</param>
 			<description>Bản dịch tour</description>
-		</item>
+		</item> -->
 		<item>
 			<param>backend/translate/translate/translatecontact</param>
 			<description>Bản dịch liên hệ</description>
 		</item>
-		<item>
+		<!-- <item>
 			<param>backend/translate/translate/translateattributecatalogue</param>
 			<description>Bản dịch nhóm thuộc tính</description>
 		</item>
 		<item>
 			<param>backend/translate/translate/translateattribute</param>
 			<description>Bản dịch thuộc tính</description>
-		</item>
+		</item> -->
 	</permissions>
 	<permissions>
 		<title>Upload</title>

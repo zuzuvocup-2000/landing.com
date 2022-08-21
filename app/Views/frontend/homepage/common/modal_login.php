@@ -6,61 +6,62 @@
             <div class="login">
                 <h1 class="heading-1"><span>Đăng nhập</span></h1>
                 <div id="login-phone" class="loginfor"><a href="" title=""><i class="fa fa-mobile" aria-hidden="true"></i> Số điện thoại</a></div>
-                <div id="login-apple" class="loginfor"><a href="" title=""><i class="fa fa-apple" aria-hidden="true"></i> Apple</a></div>
-                <div id="login-facebook" class="loginfor"><a href="" title=""><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a></div>
-                <div id="login-google" class="loginfor"><a href="" title=""><i class="fa fa-google" aria-hidden="true"></i> Gmail</a></div>
-                <form action="" class="login-form">
-                    <div class="wrap-input mb15">
+                <div id="login-apple" class="loginfor"><a href="" onclick="toastr.warning('Chức năng đang được nâng cấp!');return false;" title=""><i class="fa fa-apple" aria-hidden="true"></i> Apple</a></div>
+                <div id="login-facebook" class="loginfor"><a href="" onclick="toastr.warning('Chức năng đang được nâng cấp!');return false;" title=""><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a></div>
+                <div id="login-google" class="loginfor"><a href="" onclick="toastr.warning('Chức năng đang được nâng cấp!');return false;" title=""><i class="fa fa-google" aria-hidden="true"></i> Gmail</a></div>
+                <form action="" novalidate="novalidate" class="login-form">
+                    <div class="wrap-input mb10">
                         <label>Số điện thoại</label>
-                        <input autocomplete="on" type="text" name="phone" value="" class="form-input">
+                        <input autocomplete="on" type="text" required name="phone" value="" class="form-input">
                     </div>
                     <div class="wrap-input mb10">
                         <label>Password</label>
-                        <input autocomplete="on" type="password" name="password" value="" class="form-input">
+                        <input autocomplete="on" type="password" required name="password" value="" class="form-input">
                     </div>
-                    <a href="" class="login-forgot-pass uk-display-inline-block mb15">Quên mật khẩu?</a>
-                    <div  class="btn-login" ><a href="" title="">Đăng nhập</a></div>
+                    <a href="" class="login-forgot-pass uk-display-inline-block mb10">Quên mật khẩu?</a>
+                    <div  class="btn-login" ><button class="hd-login" type="submit">Đăng nhập</button></div>
                 </form>
             </div>
             <div class="register">
                 <h1 class="heading-1"><span>Đăng ký</span></h1>
-                <form action="" class="register-form">
-                    <div class="wrap-input mb15">
+                <form action="" novalidate="novalidate" class="register-form">
+                    <div class="wrap-input mb10">
                         <label>Số điện thoại</label>
-                        <input autocomplete="on" type="text" name="phone" value="" class="form-input">
+                        <input autocomplete="on" type="text" required name="phone" value="" class="form-input">
                     </div>
-                    <div class="wrap-input mb15">
+                    <div class="wrap-input mb10">
                         <label>Email</label>
-                        <input autocomplete="on" type="text" name="email" value="" class="form-input">
+                        <input autocomplete="on" type="text" required name="email" value="" class="form-input">
                     </div>
-                    <div class="wrap-input mb15">
+                    <div class="wrap-input mb10">
                         <label>Nhập mật khẩu</label>
-                        <input autocomplete="on" type="password" name="password" value="" class="form-input">
+                        <input autocomplete="on" type="password" required name="password" value="" class="form-input password-register">
                     </div>
                     <div class="wrap-input mb20">
                         <label>Nhập lại mật khẩu</label>
-                        <input autocomplete="on" type="password" name="password" value="" class="form-input">
+                        <input autocomplete="on" type="password" required name="password_confirm" value="" class="form-input">
                     </div>
-                    <div  class="btn-login" ><a href="" title="">Xác nhận</a></div>
+                    <div  class="btn-login" ><button class="hd-register" type="submit">Xác nhận</button></div>
                 </form>
             </div>
             <div class="forgot">
-                <h1 class="heading-1"><span>Đặt lại mật khẩu</span></h1>
-                <form action="" class="forgot-form">
-                    <div class="wrap-input mb15">
+                <h1 class="heading-1"><span>Quên mật khẩu</span></h1>
+                <form action="" novalidate="novalidate" class="forgot-form">
+                    <div class="wrap-input mb10">
                         <label>Email</label>
-                        <input autocomplete="on" type="text" name="email" value="" class="form-input">
+                        <input autocomplete="on" type="text" required name="email" value="" class="form-input">
                     </div>
-                    <div class="wrap-input mb15">
+                    <div class="btn-login" ><button class="hd-forgot" type="submit">Xác nhận</button></div>
+                </form>
+            </div>
+            <div class="verify">
+                <h1 class="heading-1"><span>Xác nhận mã OTP</span></h1>
+                <form action="" novalidate="novalidate" class="verify-form">
+                    <div class="wrap-input mb10">
                         <label>Nhập mã gồm 6 số</label>
-                        <input autocomplete="on" type="number" name="code" value="" class="form-input">
-                        <input autocomplete="on" type="submit" value="Submit">
+                        <input autocomplete="on" type="number" required name="otp" value="" class="form-input">
                     </div>
-                    <div class="wrap-input mb20">
-                        <label>Nhập mật khẩu mới</label>
-                        <input autocomplete="on" type="password" name="password" value="" class="form-input">
-                    </div>
-                    <div class="btn-login" ><a href="" title="">Xác nhận</a></div>
+                    <div class="btn-login" ><button class="hd-verify" type="submit">Xác nhận</button></div>
                 </form>
             </div>
         </div>
@@ -76,30 +77,30 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#login-phone').on('click', function(){
-            reset_display('.register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
+            reset_display(' .verify, .register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
             $('.login-form').addClass('block')
             $('.loginfor').addClass('hide')
             return false;
         });
         $('.login-forgot-pass').on('click', function(){
-            reset_display('.register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
+            reset_display(' .verify, .register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
             $('.forgot').addClass('block')
             $('.login').addClass('hide')
             return false;
         });
         $('.btn-login2').on('click', function(){
-            reset_display('.register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
+            reset_display(' .verify, .register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
             $('.register, .btn-login2').addClass('hide')
             $('.btn-register, .login').addClass('block')
             return false;
         });
 
         $('.btn-open-modal-login, .back-to-form').on('click', function(){
-            reset_display('.register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
+            reset_display(' .verify, .register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
             $('.back-to-form').addClass('hide')
         });
         $('.btn-register').on('click', function(){
-            reset_display('.register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
+            reset_display(' .verify, .register, .btn-login2, .btn-register, .login, .forgot, .login-form, .loginfor, .back-to-form')
             $('.register, .btn-login2').addClass('block')
             $('.btn-register, .login').addClass('hide')
             return false;
@@ -110,3 +111,187 @@
         $(class_name).removeClass('block').removeClass('hide')
     }
 </script>
+
+<style>
+.login,
+.forgot,
+.verify,
+
+.register{
+  padding: 50px 50px 20px 50px;
+}
+.verify,
+
+.register{
+  display: none;
+}
+.forgot{
+  display: none;
+}
+.verify .heading-1,
+.login .heading-1,
+.change-password .heading-1,
+.forgot .heading-1,
+.register .heading-1{
+  text-align: center;
+  font-family: "Work Sans";
+  line-height: 1;
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+.login  .loginfor:not(:last-child){
+  margin-bottom: 20px;
+}
+.login  .loginfor{
+  position: relative;
+}
+.login  .loginfor a{
+  display: block;
+  padding: 15px 30px;
+  text-align: center;
+  border: 1px solid rgb(227 225 228);
+  color: rgb(22, 24, 35);
+}
+  .loginfor:nth-child(2) i{
+  left: 6%;;
+}
+ .loginfor:nth-child(5) i{
+  left: 5%;;
+}
+ .loginfor i{
+  position: absolute;
+  top: 21%;
+  left: 5%;
+  font-size: 35px;
+}
+.login-foot{
+  border-top: 1px solid rgb(227 225 228);
+  text-align: center;
+  padding: 20px 0;
+}
+.btn-register a{
+  color: rgb(254, 44, 85);
+}
+.btn-forgot{
+  display: none;
+}
+.btn-forgot a{
+  color: rgb(254, 44, 85);
+}
+.btn-login2{
+  display: none;
+}
+.btn-login2 a{
+  color: rgb(254, 44, 85);
+}
+.uk-open .uk-modal-dialog {
+  padding: 0;
+}
+.login-form{
+  display: none;
+}
+.login-form {
+  padding: 0 50px;
+}
+.login-form  input{
+  width: 100%;
+  border: 1px solid rgb(227 225 228);
+  height: 50px;
+  background: rgba(241, 241, 242, 1);
+  border-radius: 5px;
+}
+.forgot-form{
+  margin-bottom: 30px;
+}
+.forgot-form  input[type="submit" i]{
+    cursor: pointer;
+    position: absolute;
+    width: 80px;
+    right: 0;
+    top: 29px;
+    text-align: center;
+    color: rgba(176,176,202,1);
+    background: white;
+}
+.forgot-form  .wrap-input{
+  position: relative;
+}
+.forgot-form {
+  padding: 0 50px;
+}
+.forgot-form  input{
+  width: 100%;
+  border: 1px solid rgb(227 225 228);
+  height: 50px;
+  background: rgba(241, 241, 242, 1);
+  border-radius: 5px;
+}
+.forgot-form  input{
+  width: 100%;
+  border: 1px solid rgb(227 225 228);
+  height: 50px;
+  background: rgba(241, 241, 242, 1);
+  border-radius: 5px;
+}
+.verify-form  input,
+.register-form  input{
+  width: 100%;
+  border: 1px solid rgb(227 225 228);
+  height: 50px;
+  background: rgba(241, 241, 242, 1);
+  border-radius: 5px;
+}
+.btn-login button{
+  border: 1px solid rgb(227 225 228);
+  background: rgba(241, 241, 242, 1);
+  color: #fff;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+}
+.uk-modal-close.uk-close {
+    background: #fff url(../public/close.png) center no-repeat;
+}
+
+.login-forgot-pass{
+  font-size: 12px;
+  color: #000;
+}
+
+.back-to-form{
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 30px;
+  line-height: 30px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.custom-nav.stickyadd .container-fluid .navbar-nav li a {
+    color: #000;
+}
+
+#login-modal input{
+    padding: 0 15px;
+}
+
+.error{
+    color: red;
+}
+
+.form-input.error{
+    border: 1px solid red;
+}
+
+.disabled{
+    cursor: not-allowed;
+}
+
+</style>

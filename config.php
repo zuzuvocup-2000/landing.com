@@ -27,3 +27,6 @@ define('HTDBHOST', 'localhost');
 define('HTDBUSER', 'root');
 define('HTDBPASS', '');
 define('HTDBNAME', 'landing_data');
+
+define('GOOGLE_CLIENT_ID', '161484741585-35985idu0325lrtfh4qdlqf0s2bbtssl.apps.googleusercontent.com');
+define('GOOGLE_SECRET_ID', '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');

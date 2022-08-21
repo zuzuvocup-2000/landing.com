@@ -10,59 +10,69 @@ class Auth extends FrontendController{
 	}
 
 	public function login(){
-		$param['email'] = $this->request->getPost('email');
-		$param['password'] = $this->request->getPost('password');
-		$check_remember = $this->request->getPost('password');
-		$user = $this->AutoloadModel->_get_where([
-			'table' => 'member',
-			'select' => 'id, fullname, email, password, salt, image, phone, address',
-			'where' => ['email' => $param['email'],'deleted_at' => 0]
-		]);
-		if(!isset($user) || is_array($user) == false || count($user) == 0){
-			echo 0;die();
-		}
-		$passwordEncode = password_encode($param['password'], $user['salt']);
-		if($passwordEncode != $user['password']){
-			echo 0;die();
+		$response = [];
+		try {
+			$param = $this->request->getPost('form');
+			$user = $this->AutoloadModel->_get_where([
+				'table' => 'member',
+				'select' => 'id, fullname, email, password, salt, image, phone, address, promotion',
+				'where' => ['phone' => $param['phone'],'deleted_at' => 0]
+			]);
+			$passwordEncode = password_encode($param['password'], (isset($user['salt']) ? $user['salt'] : ''));
+			if(!isset($user) || is_array($user) == false || count($user) == 0 || $passwordEncode != $user['password']){
+				$response['message'] = 'Tài khoản hoặc mật khẩu không chính xác!';
+				$response['code'] = '99';
+			}else{
+				$user_active = $this->AutoloadModel->_get_where([
+					'table' => 'member',
+					'select' => 'id, fullname, email, password, salt',
+					'where' => ['phone' => $param['phone'],'deleted_at' => 0,'publish' => 1]
+				]);
+				if(!isset($user_active) || is_array($user_active) == false || count($user_active) == 0){
+					$response['message'] = 'Tài khoản của bạn đã bị khoá!';
+					$response['code'] = '99';
+				}else{
+			 		$cookieAuth = [
+			 			'id' => $user['id'],
+			 			'fullname' => $user['fullname'],
+			 			'email' => $user['email'],
+			 			'address' => $user['address'],
+			 			'promotion' => $user['promotion'],
+			 			'phone' => $user['phone']
+			 		];
+			 		// if($check_remember == 1){
+			 			// setcookie(AUTH.'member', json_encode($cookieAuth), time() + 30*24*3600, "/");
+			 		// }else{
+			 			setcookie(AUTH.'member', json_encode($cookieAuth), time() + 1*24*3600, "/");
+			 		// }
+			 		$_update = [
+			 			'last_login' => gmdate('Y-m-d H:i:s', time() + 7*3600),
+						'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+						'remote_addr' => $_SERVER['REMOTE_ADDR']
+			 		];
+			 		$flag = $this->AutoloadModel->_update([
+			 			'table' => 'member',
+			 			'where' => ['id' => $user['id']],
+			 			'data' => $_update
+			 		]);
+
+			 		if($flag >0){
+			 			$response['message'] = 'Đăng nhập thành công!';
+						$response['code'] = '10';
+			 		}else{
+			 			$response['message'] = 'Có lỗi xảy ra xin vui lòng thử lại';
+						$response['code'] = '99';
+			 		}
+				}
+			}
+	 	}catch(Exception $e) {
+			$response['message'] = $e->getMessage();
+			$response['code'] = '99';
 		}
 
-		$user_active = $this->AutoloadModel->_get_where([
-			'table' => 'member',
-			'select' => 'id, fullname, email, password, salt',
-			'where' => ['email' => $param['email'],'deleted_at' => 0,'publish' => 1]
-		]);
-		if(!isset($user_active) || is_array($user_active) == false || count($user_active) == 0){
-			echo 1;die();
-		}
- 		
- 		$cookieAuth = [
- 			'id' => $user['id'],
- 			'fullname' => $user['fullname'],
- 			'email' => $user['email'],
- 			'address' => $user['address'],
- 			'phone' => $user['phone']
- 		];
- 		if($check_remember == 1){
- 			setcookie(AUTH.'member', json_encode($cookieAuth), time() + 30*24*3600, "/");
- 		}else{
- 			setcookie(AUTH.'member', json_encode($cookieAuth), time() + 1*24*3600, "/");
- 		}
- 		$_update = [
- 			'last_login' => gmdate('Y-m-d H:i:s', time() + 7*3600),
-			'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-			'remote_addr' => $_SERVER['REMOTE_ADDR']
- 		];
- 		$flag = $this->AutoloadModel->_update([
- 			'table' => 'member',
- 			'where' => ['id' => $user['id']],
- 			'data' => $_update
- 		]);
-
- 		if($flag >0){
- 			echo 'complete';die();
- 		}else{
- 			echo 'error';die();
- 		}
+		echo json_encode([
+			'response' => $response
+		]);die();
 	}
 
 	public function change_password(){
@@ -100,249 +110,244 @@ class Auth extends FrontendController{
 	}
 
 	public function send_otp_signup(){
-	 	$param['fullname'] = $this->request->getPost('fullname');
-	 	$param['email'] = $this->request->getPost('email');
-		$check_member = $this->AutoloadModel->_get_where([
-	 		'select' => 'id',
-	 		'table' => 'member',
-	 		'where' => [
-	 			'email' => $param['email'],
-	 			'deleted_at' => 0,
-	 		],
-	 		'count' => true
-	 	]);
-	 	if($check_member != 0){
-	 		echo 2;die();
-	 	}
-	 	$check = $this->AutoloadModel->_get_where([
-	 		'select' => 'id',
-	 		'table' => 'clipboard_signup',
-	 		'where' => [
-	 			'email' => $param['email']
-	 		],
-	 		'count' => true
-	 	]);
-	 	if($check != 0){
+		$response = [];
+		try {
+		 	$param = $this->request->getPost('form');
+		 	$check_exist = $this->check_exist_account($param);
+		 	if(isset($check_exist) && is_array($check_exist) && count($check_exist)){
+		 		echo json_encode([
+					'response' => $check_exist
+				]);die();
+		 	}
 	 		$this->AutoloadModel->_delete([
 		 		'table' => 'clipboard_signup',
 		 		'where' => [
 		 			'email' => $param['email'],
 		 		]
 		 	]);
-	 	}
-	 	$param['id'] = $this->AutoloadModel->_insert([
-	 		'table' => 'clipboard_signup',
-	 		'data' => [
-	 			'fullname' => $param['fullname'],
+		 	$param['id'] = $this->AutoloadModel->_insert([
+		 		'table' => 'clipboard_signup',
+		 		'data' => [
+		 			'email' => $param['email'],
+		 			'password' => $param['password'],
+		 			'phone' => $param['phone'],
+		 			'created_at' => $this->currentTime
+		 		]
+		 	]);
+
+		 	$otp = $this->otp(); 
+	 		$otp_live = $this->otp_time();
+	 		$mailbie = new MailBie();
+	 		$otpTemplate = otp_template_signup([
 	 			'email' => $param['email'],
-	 			'created_at' => $this->currentTime
-	 		]
-	 	]);
+	 			'otp' => $otp,
+	 		]);
 
-	 	$otp = $this->otp(); 
- 		$otp_live = $this->otp_time();
- 		$mailbie = new MailBie();
- 		$otpTemplate = otp_template_signup([
- 			'fullname' => $param['fullname'],
- 			'otp' => $otp,
- 		]);
-
- 		$flag = $mailbie->send([
- 			'to' => $param['email'],
- 			'subject' => 'Mã OTP đăng ký cho Email: '.$param['email'],
- 			'messages' => $otpTemplate,
- 		]);
-
- 		$update = [
- 			'otp' => $otp,
- 			'otp_live' => $otp_live,
- 		];
- 		$countUpdate = $this->AutoloadModel->_update([
- 			'table' => 'clipboard_signup',
- 			'data' => $update,
- 			'where' => ['id' => $param['id']],
- 		]);
- 		if($flag != 0 && $countUpdate != 0){
- 			echo 1;die();
- 		}else{
- 			echo 0;die();
- 		}
-	}
-	public function signup_ajax(){
-		helper(['text']);
-	 	$store['fullname'] = $this->request->getPost('fullname');
-	 	$store['email'] = $this->request->getPost('email');
-	 	$store['password'] = $this->request->getPost('password');
-	 	$store['address'] = $this->request->getPost('address');
-	 	$store['phone'] = $this->request->getPost('phone');
-
-	 	$count_member = $this->AutoloadModel->_get_where([
-	 		'select' => 'email',
-	 		'table' => 'member',
-	 		'where' => [
-	 			'email' => $store['email'],
-	 			'deleted_at' => 0
-	 		],
-	 		'count' => true
-	 	]);
-	 	if($count_member > 0){
-	 		echo 2;die();
-	 	}
-
-	 	$salt = random_string('alnum', 168);
- 		$store['password'] = password_encode($store['password'], $salt);
- 		$store['salt'] = $salt;
- 		$store['created_at'] = $this->currentTime;
-		$store['publish'] = 1;
-		$insertid = $this->AutoloadModel->_insert(['table' => 'member','data' => $store]);
-		if($insertid == 0){
-			echo 0;die();
-		}else{
-			echo 3;die();
+	 		$flag = $mailbie->send([
+	 			'to' => $param['email'],
+	 			'subject' => 'Mã OTP đăng ký cho Email: '.$param['email'],
+	 			'messages' => $otpTemplate,
+	 		]);
+	 		if($flag > 0){
+		 		$update = [
+		 			'otp' => $otp,
+		 			'otp_live' => $otp_live,
+		 		];
+		 		$countUpdate = $this->AutoloadModel->_update([
+		 			'table' => 'clipboard_signup',
+		 			'data' => $update,
+		 			'where' => ['id' => $param['id']],
+		 		]);
+		 		$response['message'] = 'Gửi mã OTP thành công! Xin vui lòng đăng nhập Email để lấy mã OTP!';
+				$response['code'] = '10';
+				$response['id'] = $param['id'];
+	 		}else{
+	 			$response['message'] = 'Có lỗi xảy ra xin vui lòng thử lại';
+				$response['code'] = '99';
+	 		}
+		}catch(Exception $e) {
+			$response['message'] = $e->getMessage();
+			$response['code'] = '99';
 		}
+
+		echo json_encode([
+			'response' => $response
+		]);die();
 	}
 
 	public function signup(){
-		helper(['text']);
-	 	$param = $this->request->getPost('data');
-	 	$store = [];
-	 	foreach ($param as $key => $value) {
-	 		$store[$value['name']] = $value['value'];
-	 	}
+		$response = [];
+		try {
+			helper(['text']);
+		 	$store['id'] = $this->request->getPost('id');
+		 	$store['otp'] = $this->request->getPost('otp');
 
-	 	$count = $this->AutoloadModel->_get_where([
-	 		'select' => 'otp, otp_live',
-	 		'table' => 'clipboard_signup',
-	 		'where' => [
-	 			'email' => $store['email'],
-	 			'otp' => $store['otp']
-	 		]
-	 	]);
-	 	if($count == [] || (strtotime($this->currentTime) > strtotime($count['otp_live']))){
-	 		echo json_encode($flag['error'] = 'otp'); die();
-	 	}
-	 	$count_member = $this->AutoloadModel->_get_where([
-	 		'select' => 'email',
-	 		'table' => 'member',
-	 		'where' => [
-	 			'email' => $store['email'],
-	 			'deleted_at' => 0
-	 		],
-	 		'count' => true
-	 	]);
-	 	if($count_member > 0){
-	 		echo json_encode($flag['error'] = 'email_exist'); die();
-	 	}
-	 	$store['otp'] = $count['otp'];
-	 	$store['otp_live'] = $count['otp_live'];
+		 	$count = $this->AutoloadModel->_get_where([
+		 		'select' => 'otp, otp_live, phone, email, password',
+		 		'table' => 'clipboard_signup',
+		 		'where' => [
+		 			'id' => $store['id'],
+		 			'otp' => $store['otp']
+		 		]
+		 	]);
+		 	if($count == [] || (strtotime($this->currentTime) > strtotime($count['otp_live']))){
+		 		$response['message'] = 'Mã OTP đã hết hạn!';
+				$response['code'] = '99';
+		 	}else{
+		 		$check_exist = $this->check_exist_account($count);
+			 	if(isset($check_exist) && is_array($check_exist) && count($check_exist)){
+			 		echo json_encode([
+						'response' => $check_exist
+					]);die();
+			 	}
+			 	$store['otp'] = $count['otp'];
+			 	$store['otp_live'] = $count['otp_live'];
 
-	 	$salt = random_string('alnum', 168);
- 		$store['password'] = password_encode($store['password'], $salt);
- 		$store['salt'] = $salt;
- 		$store['created_at'] = $this->currentTime;
-		$store['publish'] = 1;
-		unset($store['confirm-password']);
-		$insertid = $this->AutoloadModel->_insert(['table' => 'member','data' => $store]);
-		if($insertid > 0){
-			$this->AutoloadModel->_delete([
-				'table' => 'clipboard_signup',
-				'where' => [
-					'email' => $store['email']
-				]
-			]);
+			 	$salt = random_string('alnum', 168);
+		 		$store['password'] = password_encode($count['password'], $salt);
+		 		$store['salt'] = $salt;
+		 		$store['phone'] = $count['phone'];
+		 		$store['email'] = $count['email'];
+		 		$store['salt'] = $salt;
+		 		$store['created_at'] = $this->currentTime;
+				$store['publish'] = 1;
+				$insertid = $this->AutoloadModel->_insert(['table' => 'member','data' => $store]);
+				if($insertid > 0){
+					$this->AutoloadModel->_delete([
+						'table' => 'clipboard_signup',
+						'where' => [
+							'id' => $store['id']
+						]
+					]);
+
+					$response['message'] = 'Đăng ký tài khoản thành công!';
+					$response['code'] = '10';
+				}else{
+					$response['message'] = 'Có lỗi xảy ra xin vui lòng thử lại!';
+					$response['code'] = '99';
+				}
+		 	}
+		}catch(Exception $e) {
+			$response['message'] = $e->getMessage();
+			$response['code'] = '99';
 		}
-		if($insertid > 0){
-			echo json_encode($flag['error'] = 'no_error'); die();
-		}
+
+		echo json_encode([
+			'response' => $response
+		]);die();
 	}
 
 	public function send_otp_forgot(){
-	 	$param['email'] = $this->request->getPost('email');
-		$check_email = $this->AutoloadModel->_get_where([
-	 		'select' => 'id, fullname',
-	 		'table' => 'member',
-	 		'where' => [
-	 			'email' => $param['email']
-	 		],
-	 	]);
-	 	if(count($check_email) == 0){
-	 		echo 'no_email';die();
-	 	}
+		$response = [];
+		try {
+		 	$param['email'] = $this->request->getPost('email');
+			$check_email = $this->AutoloadModel->_get_where([
+		 		'select' => 'id, fullname',
+		 		'table' => 'member',
+		 		'where' => [
+		 			'email' => $param['email']
+		 		],
+		 	]);
+		 	if(count($check_email) == 0){
+		 		$response['message'] = 'Tài khoản không tồn tại!';
+				$response['code'] = '99';
+		 	}else{
+			 	$otp = $this->otp(); 
+		 		$otp_live = $this->otp_time();
+		 		$mailbie = new MailBie();
+		 		$otpTemplate = otp_template([
+		 			'fullname' => $param['email'],
+		 			'otp' => $otp,
+		 		]);
 
-	 	$otp = $this->otp(); 
- 		$otp_live = $this->otp_time();
- 		$mailbie = new MailBie();
- 		$otpTemplate = otp_template([
- 			'fullname' => $check_email['fullname'],
- 			'otp' => $otp,
- 		]);
+		 		$flag = $mailbie->send([
+		 			'to' => $param['email'],
+		 			'subject' => 'Quên mật khẩu cho tài khoản: '.$param['email'],
+		 			'messages' => $otpTemplate,
+		 		]);
 
- 		$flag = $mailbie->send([
- 			'to' => $param['email'],
- 			'subject' => 'Quên mật khẩu cho tài khoản: '.$param['email'],
- 			'messages' => $otpTemplate,
- 		]);
+				$update = [
+		 			'otp' => $otp,
+		 			'otp_live' => $otp_live,
+		 		];
+		 		$countUpdate = $this->AutoloadModel->_update([
+		 			'table' => 'member',
+		 			'data' => $update,
+		 			'where' => ['id' => $check_email['id']],
+		 		]);
+		 		if($countUpdate > 0 && $flag == true){
+		 			$response['message'] = 'Xin vòng đăng nhập vào Email để lấy mã xác thực OTP!';
+					$response['code'] = '10';
+					$response['id'] = $check_email['id'];
+		 		}else{
+		 			$response['message'] = 'Có lỗi xảy ra xin vui lòng thử lại!';
+					$response['code'] = '99';
+		 		}
+		 	}
 
-		$update = [
- 			'otp' => $otp,
- 			'otp_live' => $otp_live,
- 		];
- 		$countUpdate = $this->AutoloadModel->_update([
- 			'table' => 'member',
- 			'data' => $update,
- 			'where' => ['id' => $check_email['id']],
- 		]);
- 		if($countUpdate > 0 && $flag == true){
- 			echo 'success';die();
- 		}else{
- 			echo 'error';die();
- 		}
- 		
+	 	}catch(Exception $e) {
+			$response['message'] = $e->getMessage();
+			$response['code'] = '99';
+		}
+
+		echo json_encode([
+			'response' => $response
+		]);die();
 	}
+
 	public function get_new_password(){
-	 	$param['email'] = $this->request->getPost('email');
-	 	$param['otp'] = $this->request->getPost('otp');
+		$response = [];
+		try {
+		 	$param['id'] = $this->request->getPost('id');
+		 	$param['otp'] = $this->request->getPost('otp');
+		 	$user = $this->AutoloadModel->_get_where([
+		 		'select' => 'id, fullname, email, otp, otp_live',
+		 		'table' => 'member',
+		 		'where' => [
+		 			'id' => $param['id'],
+		 			'deleted_at' => 0
+		 		],
+		 	]);
+			$currentTime = gmdate('Y-m-d H:i:s', time() + 7*3600);
+			if(strtotime($currentTime) > strtotime($user['otp_live']) || $user['otp'] != $param['otp']){
+				$response['message'] = 'Mã OTP đã hết hạn hoặc không đúng!';
+				$response['code'] = '99';
+			}else{
+			 	$salt = random_string('alnum', 168);
+		 		$password = random_string('numeric', 6);
+		 		$password_encode = password_encode($password, $salt);
+		 		$update = [
+		 			'password' => $password_encode,
+		 			'salt' => $salt,
+		 		];
 
-	 	$user = $this->AutoloadModel->_get_where([
-	 		'select' => 'id, fullname, email, otp, otp_live',
-	 		'table' => 'member',
-	 		'where' => [
-	 			'email' => $param['email'],
-	 			'deleted_at' => 0
-	 		],
-	 	]);
-		$currentTime = gmdate('Y-m-d H:i:s', time() + 7*3600);
-		if(strtotime($currentTime) > strtotime($user['otp_live'])){
-			echo 'error_otp';die();
+		 		$flag = $this->AutoloadModel->_update([
+		 			'table' => 'member',
+		 			'data' => $update,
+		 			'where' => ['id' => $user['id']]
+		 		]);
+		 		if($flag > 0){
+		 			$mailbie = new Mailbie();
+				 	$mailFlag = $mailbie->send([
+			 			'to' => $user['email'],
+			 			'subject' => 'Quên mật khẩu cho tài khoản: '.$user['email'],
+			 			'messages' => '<h3>Mật khẩu mới của bạn là: '.$password.'</h3><div><a target="_blank" href="'.base_url('login.html').'">Click vào đây để tiến hành đăng nhập</a></div>',
+			 		]);
+			 		$response['message'] = 'Mật khẩu mới đã được gửi vào Email của bạn!';
+					$response['code'] = '10';
+		 		}else{
+			 		$response['message'] = 'Có lỗi xảy ra xin vui lòng thử lại!';
+					$response['code'] = '99';
+		 		}
+			}
+		}catch(Exception $e) {
+			$response['message'] = $e->getMessage();
+			$response['code'] = '99';
 		}
-		if($user['otp'] != $param['otp']){
-			echo 'error_otp';die();
-		}
-	 	$salt = random_string('alnum', 168);
- 		$password = random_string('numeric', 6);
- 		$password_encode = password_encode($password, $salt);
- 		$update = [
- 			'password' => $password_encode,
- 			'salt' => $salt,
- 		];
 
- 		$flag = $this->AutoloadModel->_update([
- 			'table' => 'member',
- 			'data' => $update,
- 			'where' => ['id' => $user['id']]
- 		]);
- 		if($flag > 0){
- 			$mailbie = new Mailbie();
-		 	$mailFlag = $mailbie->send([
-	 			'to' => $user['email'],
-	 			'subject' => 'Quên mật khẩu cho tài khoản: '.$user['email'],
-	 			'messages' => '<h3>Mật khẩu mới của bạn là: '.$password.'</h3><div><a target="_blank" href="'.base_url('login.html').'">Click vào đây để tiến hành đăng nhập</a></div>',
-	 		]);
-	 		if($mailFlag == true){
-	 			echo 'success';die();
-	 		}
- 		}
-		echo 'error';die();
+		echo json_encode([
+			'response' => $response
+		]);die();
 	}
 
 	public function update_info_member(){
@@ -419,5 +424,28 @@ class Auth extends FrontendController{
 	private function otp_time(){
 		$timeToLive = gmdate('Y-m-d H:i:s', time() + 7*3600 + 300);
 		return $timeToLive;
+	}
+
+	private function check_exist_account($param = []){
+		$response = [];
+		$count = $this->AutoloadModel->_get_where([
+	 		'select' => 'COUNT(tb1.id) as count_email, (SELECT COUNT(tb2.id) FROM member as tb2 WHERE tb2.phone = "'.$param['phone'].' AND tb2.deleted_at = 0")  as count_phone',
+	 		'table' => 'member as tb1',
+	 		'where' => [
+	 			'tb1.email' => $param['email'],
+	 			'tb1.deleted_at' => 0
+	 		]
+	 	]);
+
+		if(isset($count['count_email']) && $count['count_email'] > 0){
+			$response['message'] = 'Email đã tồn tại!';
+			$response['code'] = '99';
+		}
+
+		if(isset($count['count_phone']) && $count['count_phone'] > 0){
+			$response['message'] = 'Số điện thoại đã tồn tại!';
+			$response['code'] = '99';
+		}
+	 	return $response;
 	}
 }

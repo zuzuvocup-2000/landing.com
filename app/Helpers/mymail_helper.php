@@ -64,7 +64,7 @@ if(!function_exists('otp_template_signup')){
 									<table  cellpadding="0" cellspacing="0">
 										<tr>
 											<td style="vertical-align: top;padding: 0 0 20px;"  class="content-block">
-												<h3 style="margin-top:10px !important;margin-top:10px;font-family:\'Segoe UI\';font-weight:500;text-transform:uppercase;">Xin chào '.$param['fullname'].',</h3>
+												<h3 style="margin-top:10px !important;margin-top:10px;font-family:\'Segoe UI\';font-weight:500;text-transform:uppercase;">Xin chào '.$param['email'].',</h3>
 											</td>
 										</tr>
 										<tr>

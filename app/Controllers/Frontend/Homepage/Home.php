@@ -18,54 +18,55 @@ class Home extends FrontendController{
 		$this->data['meta_description'] = (isset($this->data['general']['seo_meta_description']) ? $this->data['general']['seo_meta_description'] : '');
 		$this->data['og_type'] = 'website';
 		$this->data['canonical'] = BASE_URL;
-		$panel = get_panel([
-			'locate' => 'home',
-			'language' => $this->currentLanguage()
-		]);
-        foreach ($panel as $key => $value) {
-			$this->data['panel'][$value['keyword']] = $value;
-		}
+		// $panel = get_panel([
+		// 	'locate' => 'landing',
+		// 	'language' => $this->currentLanguage()
+		// ]);
+  //       foreach ($panel as $key => $value) {
+		// 	$this->data['panel'][$value['keyword']] = $value;
+		// }
 
-		$productCatalogueList = $this->AutoloadModel->_get_where([
-			'select' => 'tb1.id, tb2.title,  tb2.canonical,  tb1.hot, tb1.image, tb2.description',
-			'table' => 'product_catalogue as tb1',
+		$articleCatalogueList = $this->AutoloadModel->_get_where([
+			'select' => 'tb1.id, tb2.title,  tb2.canonical,   tb1.image, tb2.description',
+			'table' => 'article_catalogue as tb1',
 			'join' =>  [
 				[
-					'product_translate as tb2','tb1.id = tb2.objectid AND tb2.module = "product_catalogue"   AND tb2.language = \''.$this->currentLanguage().'\' ','inner'
+					'article_translate as tb2','tb1.id = tb2.objectid AND tb2.module = "article_catalogue"   AND tb2.language = \''.$this->currentLanguage().'\' ','inner'
 				],
 			],
 			'where' => [
 				'tb1.deleted_at' => 0,
 				'tb1.publish' => 1,
-				'tb1.hot' => 1
+				'tb1.id' => 12
 			],
 			'order_by'=> 'tb1.id desc',
 			'group_by'=> 'tb1.id',
-		], TRUE);
-		if(isset($productCatalogueList) && is_array($productCatalogueList) && count($productCatalogueList)){
-			foreach ($productCatalogueList as $key => $value) {
-				$listid = $this->condition_catalogue($value['id']);
-				$productCatalogueList[$key]['data'] = $this->AutoloadModel->_get_where([
-					'select' => 'tb1.id, tb2.title, tb1.image, tb2.canonical',
-					'table' => 'product as tb1',
-					'where' => [
-						'tb1.deleted_at' => 0,
-						'tb1.publish' => 1,
+		]);
+		if(isset($articleCatalogueList) && is_array($articleCatalogueList) && count($articleCatalogueList)){
+			$listid = $this->condition_catalogue($articleCatalogueList['id']);
+			$articleCatalogueList['data'] = $this->AutoloadModel->_get_where([
+				'select' => 'tb1.id, tb2.title, tb1.image, tb2.description, tb2.canonical, tb1.created_at, tb3.image as image_user, tb3.fullname',
+				'table' => 'article as tb1',
+				'where' => [
+					'tb1.deleted_at' => 0,
+					'tb1.publish' => 1,
+				],
+				'where_in' => $listid['where_in'],
+				'where_in_field' => $listid['where_in_field'],
+				'join' => [
+					[
+						'article_translate as tb2','tb1.id = tb2.objectid AND tb2.module = "article" AND tb2.language = \''.$this->currentLanguage().'\' ','inner'
 					],
-					'where_in' => $listid['where_in'],
-					'where_in_field' => $listid['where_in_field'],
-					'join' => [
-						[
-							'product_translate as tb2','tb1.id = tb2.objectid AND tb2.module = "product" AND tb2.language = \''.$this->currentLanguage().'\' ','inner'
-						],
-					],
-					'order_by'=> ' tb1.id desc',
-					'group_by' => 'tb1.id'
-				], TRUE);
-			}
+					[
+						'user as tb3', 'tb1.userid_created = tb3.id AND tb3.deleted_at = 0', 'left'
+					]
+				],
+				'order_by'=> ' tb1.id desc',
+				'group_by' => 'tb1.id'
+			], TRUE);
 		}
 		$this->data['home'] = 'home';
-		$this->data['productCatalogueList'] = $productCatalogueList;
+		$this->data['articleCatalogueList'] = $articleCatalogueList;
 		$this->data['template'] = 'frontend/homepage/home/index';
 		return view('frontend/homepage/layout/home', $this->data);
 	}
