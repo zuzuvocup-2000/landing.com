@@ -534,6 +534,25 @@
 			<description>Xóa</description>
 		</item>
 	</permissions>
+	<permissions>
+		<title>Quản lý - [Khuyến mãi]</title>
+		<item>
+			<param>backend/promotion/promotion/index</param>
+			<description>Xem </description>
+		</item>
+		<item>
+			<param>backend/promotion/promotion/create</param>
+			<description>Thêm</description>
+		</item>
+		<item>
+			<param>backend/promotion/promotion/update</param>
+			<description>Sửa </description>
+		</item>
+		<item>
+			<param>backend/promotion/promotion/delete</param>
+			<description>Xóa</description>
+		</item>
+	</permissions>
 	<!-- <permissions>
 		<title>Quản lý - [Comment]</title>
 		<item>

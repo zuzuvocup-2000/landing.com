@@ -53,6 +53,25 @@ class ObjectRules {
 		return true;
  	}
 
+ 	public function check_promotionid(string $promotionid = '', string $module = ''): bool{
+		
+		$originalId = $this->request->getPost('promotionid_original');
+		$modulExtract = explode('_', $module);
+		$count = 0;
+		if($originalId != $promotionid){
+			$count = $this->AutoloadModel->_get_where([
+				'select' => 'id',
+				'table' => $modulExtract[0],
+				'where' => ['promotionid' => $promotionid],
+				'count' => TRUE
+			]);
+		}
+		if($count > 0){
+			return false;
+		}
+		return true;
+ 	}
+
  	public function check_router(string $canonical = ''): bool{
 		$originalCanonical = $this->request->getPost('original_canonical');
 		$count = 0;
