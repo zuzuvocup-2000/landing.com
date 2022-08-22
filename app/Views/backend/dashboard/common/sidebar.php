@@ -170,6 +170,11 @@
                     </ul>
                 </li>
                 <?php } ?>
+                <?php if(in_array('backend/promotion/promotion/index', $permission)){ ?>
+                <li class="<?php echo ( $uriModule == 'promotion') ? 'active'  : '' ?>">
+                    <a href="<?php echo base_url('backend/promotion/promotion/index') ?>"><i class="fa fa-percent" aria-hidden="true"></i><span class="nav-label">QL Khuyến mãi</span> </a>
+                </li>
+                <?php } ?>
                 <?php if(in_array('backend/language/language/index', $permission) || in_array('backend/slide/slide/index', $permission) || in_array('backend/panel/panel/index', $permission) || in_array('backend/widget/widget/index', $permission) || in_array('backend/system/general/index', $permission) || in_array('backend/system/system/store', $permission) || in_array('backend/menu/menu/listmenu', $permission)){ ?>
                 <li class="<?php echo ( $uriModule == 'language' || $uriModule == 'system' || $uriModule == 'panel' || $uriModule == 'slide' || $uriModule == 'widget' || $uriModule == 'menu') ? 'active'  : '' ?>">
                     <a href="index.html"><i class="fa fa-cog"></i> <span class="nav-label"><?php echo translate('cms_lang.sidebar.sb_setting', $language) ?></span> <span class="fa arrow"></span></a>

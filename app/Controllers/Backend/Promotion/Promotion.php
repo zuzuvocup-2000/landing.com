@@ -1,5 +1,5 @@
 <?php 
-namespace App\Controllers\Backend\Product;
+namespace App\Controllers\Backend\Promotion;
 use App\Controllers\BaseController;
 
 class Promotion extends BaseController{
