@@ -98,7 +98,7 @@
 									<img src="" class="abc" alt="">
 								</div>
 							</div>
-							<?php if(isset($type) && is_array($type) && count($type)){
+							<?php /*<?php if(isset($type) && is_array($type) && count($type)){
 								foreach ($type as $key => $value) {
 							?>
 							<div class="col-lg-12 mb15">
@@ -110,7 +110,7 @@
 									</select>
 								</div>
 							</div>
-							<?php }} ?>
+							<?php }} ?>*/ ?>
 						</div>
 						
 					</div>

@@ -62,3 +62,40 @@ function select2_dangvien(object){
 		}
 	});
 }
+
+$(document).on('click','.btn-reset-pass', function(){
+		let _this = $(this);
+		let id = _this.parents('tr').attr('data-id')
+		if(id.length > 0){
+			swal({
+				title: "Hãy chắc chắn rằng bạn muốn thực hiện thao tác này? Reset mật khẩu bằng phương thức gửi mail đến tài khoản!",
+				text: 'Xác nhận gửi Mail?',
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Thực hiện!",
+				cancelButtonText: "Hủy bỏ!",
+				closeOnConfirm: false,
+				closeOnCancel: false },
+			function (isConfirm) {
+				if (isConfirm) {
+					var formURL = 'ajax/member/reset_pass';
+					$.post(formURL, {
+						id: id},
+						function(data){
+							let json = JSON.parse(data)
+							if(json.response.code == 99){
+								sweet_error_alert('Có vấn đề xảy ra','Vui lòng thử lại')
+							}else{
+								swal("Reset mật khẩu thành công!", "Xin vui lòng đăng nhập Email để lấy lại mật khẩu mới.", "success");
+								window.location.href = BASE_URL+'backend/member/member/index';
+							}
+						});
+				} else {
+					swal("Hủy bỏ", "Thao tác bị hủy bỏ", "error");
+				}
+			});
+		}
+		
+		return false;
+	});

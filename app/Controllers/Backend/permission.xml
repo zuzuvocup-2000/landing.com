@@ -412,7 +412,7 @@
 			<description>Xóa</description>
 		</item>
 	</permissions>
-	<permissions>
+	<!-- <permissions>
 		<title>Nhóm - [Thông tin Người dùng]</title>
 		<item>
 			<param>backend/member/info/index</param>
@@ -430,7 +430,7 @@
 			<param>backend/member/info/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
+	</permissions> -->
 	<permissions>
 		<title>Danh sách - [Người dùng]</title>
 		<item>

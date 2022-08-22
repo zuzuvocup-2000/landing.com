@@ -132,7 +132,8 @@
                                 <td class="text-center td-status" data-field="publish" data-module="<?php echo $module; ?>"><?php echo $status; ?></td>
                                 <td class="text-center">
                                     <a type="button" href="<?php echo base_url('backend/member/member/update/'.$val['id']) ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                                    <a type="button" href="<?php echo base_url('backend/member/member/delete/'.$val['id']) ?>" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a type="button" href="<?php echo base_url('backend/member/member/delete/'.$val['id']) ?>" class="btn btn-info"><i class="fa fa-trash"></i></a>
+                                    <a type="button" href="" class="btn btn-danger btn-reset-pass"><i class="fa fa-lock" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             <?php }}else{ ?>

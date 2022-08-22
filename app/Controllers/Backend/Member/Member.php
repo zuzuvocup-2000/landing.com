@@ -78,7 +78,7 @@ class Member extends BaseController{
 		 		$insert = $this->store();
 		 		$insertid = $this->AutoloadModel->_insert(['table' => $this->data['module'],'data' => $insert]);
 		 		if($insertid > 0){
-		 			$flag = $this->create_relationship($insertid);
+		 			// $flag = $this->create_relationship($insertid);
 		 			$session->setFlashdata('message-success', 'Thêm mới người dùng thành công');
 		 			return redirect()->to(BASE_URL.'backend/member/member/index');
 		 		}
@@ -112,7 +112,7 @@ class Member extends BaseController{
 			$session->setFlashdata('message-danger', 'Thành viên không tồn tại');
  			return redirect()->to(BASE_URL.'backend/member/member/index');
 		}
-		$this->data[$this->data['module']]['detail'] = json_decode($this->data[$this->data['module']]['detail'],true);
+		// $this->data[$this->data['module']]['detail'] = json_decode($this->data[$this->data['module']]['detail'],true);
 		if($this->request->getMethod() == 'post'){
 			$validation = $this->validation();	
 			
@@ -121,7 +121,7 @@ class Member extends BaseController{
 		 		$flag = $this->AutoloadModel->_update(['table' => $this->data['module'],'data' => $update, 'where' => ['id' =>$id]]);
 		 		if($flag > 0){
 		 			$session = session();
-		 			$this->create_relationship($id);
+		 			// $this->create_relationship($id);
 		 			$session->setFlashdata('message-success', 'Cập nhật người dùng thành công');
 		 			return redirect()->to(BASE_URL.'backend/member/member/index');
 		 		}
@@ -280,7 +280,7 @@ class Member extends BaseController{
 	private function store(){
 		helper(['text']);
 		$salt = random_string('alnum', 168);
-		$detail = $this->request->getPost('detail');
+		// $detail = $this->request->getPost('detail');
 		$store = [
  			'email' => $this->request->getPost('email'),
  			'fullname' => $this->request->getPost('fullname'),
@@ -289,7 +289,7 @@ class Member extends BaseController{
  			'image' => $this->request->getPost('image'),
  			'birthday' => $this->request->getPost('birthday'),
  			'address' => $this->request->getPost('address'),
- 			'detail' => json_encode($detail),
+ 			// 'detail' => json_encode($detail),
  			'phone' => $this->request->getPost('phone'),
  			'cityid' => $this->request->getPost('cityid'),
  			'districtid' => $this->request->getPost('districtid'),
