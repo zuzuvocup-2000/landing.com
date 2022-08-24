@@ -6,6 +6,14 @@
         .custom-nav .container-fluid .navbar-nav li a{
             color: #fff;
         }
+         .custom-nav.stickyadd .login-member-profile,
+         .custom-nav.stickyadd .container-fluid .navbar-nav li a{
+            color: #000;
+         }
+
+          .custom-nav.stickyadd .login-member-profile{
+            border: 1px solid #000;
+         }
         .mdi-menu,
         .ser_box .ser_icon i,
         /*.banner-headline span,*/
