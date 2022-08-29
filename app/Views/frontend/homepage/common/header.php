@@ -1,24 +1,16 @@
 <?php
 	$model = new App\Models\AutoloadModel();
 	$currentDay = date('Y-m-d H:i:s');
-	// $promotion  = $this->Autoload_Model->_get_where([
-	// 	'select' => 'title, album, description',
-	// 	'table' => 'promotion',
-	// 	'where' => [
-	// 		'publish' => 1,
-	// 	],
-	// ]);
-
-	// if(!isset($promotion) || is_array($promotion) == false || count($promotion) == 0){ 
-	// 	$promotion  = $this->Autoload_Model->_get_where([
-	// 		'select' => 'title, album, description',
-	// 		'table' => 'promotion',
-	// 		'where' => [
-	// 			'start_date <=' => $currentDay,
-	// 			'end_date >=' => $currentDay,
-	// 		],
-	// 	]);
- //    }
+	$promotion  = $model->_get_where([
+		'select' => 'title, image',
+		'table' => 'promotion',
+		'where' => [
+			'publish' => 1,
+			'deleted_at' => 0,
+			'login' => 1,
+		],
+	]);
+	prE($promotion);
 	$cookie  = [];
     if(isset($_COOKIE[AUTH.'member'])) $cookie = json_decode($_COOKIE[AUTH.'member'],TRUE);
 

@@ -110,15 +110,15 @@ class Promotion extends BaseController{
  			return redirect()->to(BASE_URL.'backend/dashboard/dashboard/index');
 		}
 		$this->data[$this->data['module']] = $this->AutoloadModel->_get_where([
-			'select' => 'id, title, price, max, promotionid, publish,(SELECT COUNT(id) FROM bill WHERE '.$this->data['module'].'.promotionid = bill.promotionid) as count_bill',
+			'select' => '*',
 			'table' => $this->data['module'],
 			'where' => ['id' => $id,'deleted_at' => 0]
 		]);
-		// pre($this->data[$this->data['module']]);
 		if(!isset($this->data[$this->data['module']]) || is_array($this->data[$this->data['module']]) == false || count($this->data[$this->data['module']]) == 0){
 			$session->setFlashdata('message-danger', 'Khuyến mãi không tồn tại');
  			return redirect()->to(BASE_URL.'backend/promotion/promotion/index');
 		}
+		$this->data[$this->data['module']]['daterange'] = date('d/m/Y', strtotime($this->data[$this->data['module']]['date_start'])).' - '.date('d/m/Y', strtotime($this->data[$this->data['module']]['date_end']));
 		if($this->request->getMethod() == 'post'){
 
 			$validate = $this->validation();

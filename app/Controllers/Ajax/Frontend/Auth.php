@@ -15,7 +15,7 @@ class Auth extends FrontendController{
 			$param = $this->request->getPost('form');
 			$user = $this->AutoloadModel->_get_where([
 				'table' => 'member',
-				'select' => 'id, fullname, email, password, salt, image, phone, address, promotion',
+				'select' => 'id, fullname, check_promotion, email, password, salt, image, phone, address, promotion',
 				'where' => ['phone' => $param['phone'],'deleted_at' => 0]
 			]);
 			$passwordEncode = password_encode($param['password'], (isset($user['salt']) ? $user['salt'] : ''));
@@ -38,7 +38,8 @@ class Auth extends FrontendController{
 			 			'email' => $user['email'],
 			 			'address' => $user['address'],
 			 			'promotion' => $user['promotion'],
-			 			'phone' => $user['phone']
+			 			'check_promotion' => $user['check_promotion'],
+			 			'phone' => $user['phone'],
 			 		];
 			 		// if($check_remember == 1){
 			 			// setcookie(AUTH.'member', json_encode($cookieAuth), time() + 30*24*3600, "/");
@@ -48,7 +49,8 @@ class Auth extends FrontendController{
 			 		$_update = [
 			 			'last_login' => gmdate('Y-m-d H:i:s', time() + 7*3600),
 						'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-						'remote_addr' => $_SERVER['REMOTE_ADDR']
+						'remote_addr' => $_SERVER['REMOTE_ADDR'],
+			 			'check_promotion' => 1
 			 		];
 			 		$flag = $this->AutoloadModel->_update([
 			 			'table' => 'member',

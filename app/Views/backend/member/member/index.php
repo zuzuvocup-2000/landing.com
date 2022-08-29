@@ -134,6 +134,7 @@
                                     <a type="button" href="<?php echo base_url('backend/member/member/update/'.$val['id']) ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                                     <a type="button" href="<?php echo base_url('backend/member/member/delete/'.$val['id']) ?>" class="btn btn-info"><i class="fa fa-trash"></i></a>
                                     <a type="button" href="" class="btn btn-danger btn-reset-pass"><i class="fa fa-lock" aria-hidden="true"></i></a>
+                                    <a type="button" href="" data-toggle="modal" data-target="#open_discount" data-module="<?php echo $module; ?>" class="btn btn-warning "><i class="fa fa-percent" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             <?php }}else{ ?>
@@ -147,6 +148,43 @@
                         <?php echo (isset($pagination)) ? $pagination : ''; ?>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="open_discount" class="modal fade va-general">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="uk-flex uk-flex-space-between uk-flex-middle" >
+                    <h4 class="modal-title">Danh sách mã khuyến mãi</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-bordered table-hover dataTables-example">
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 30px;">STT</th>
+                            <th>Tiêu đề</th>
+                            <th class="text-center">Code</th>
+                            <th class="text-center">Loại</th>
+                            <th class="text-center">Giảm</th>
+                            <th class="text-center">Tình trạng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center">1</td>
+                            <td>1</td>
+                            <td class="text-center">1</td>
+                            <td class="text-center">1</td>
+                            <td class="text-center">1</td>
+                            <td class="text-center">1</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
