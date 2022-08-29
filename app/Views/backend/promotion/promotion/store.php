@@ -21,11 +21,11 @@
 							<div class="col-lg-6 mb15">
 								<div class="form-row">
 									<label class="control-label text-left">
-										<span>Loại khuyến mại <b class="text-danger">(*)</b></span>
+										<span>Loại khuyến mại </span>
 									</label>
 									<?php
 										$type = [
-											'price' => 'VNĐ',
+											// 'price' => 'VNĐ',
 											'percent' => '%',
 										]
 									?>
@@ -35,10 +35,10 @@
 							<div class="col-lg-6 mb15">
 								<div class="form-row relative">
 									<label class="control-label text-left">
-										<span>Giảm <b class="text-danger">(*)</b></span>
+										<span>Giảm </span>
 									</label>
 									<?php echo form_input('discount_value', validate_input(set_value('discount_value', (isset($promotion['discount_value'])) ? $promotion['discount_value'] : '')), 'class="form-control int" placeholder="" autocomplete="off"'); ?>
-									<div style="font-size:13px;width: 60px;border: 1px solid #c4cdd5;position: absolute;bottom: 0;right: 0;background: #eee;" class="btn btn-white extend">VNĐ</div>
+									<div style="font-size:13px;width: 60px;border: 1px solid #c4cdd5;position: absolute;bottom: 0;right: 0;background: #eee;" class="btn btn-white extend">%</div>
 								</div>
 							</div>
 							<div class="col-lg-6 mb15">
@@ -52,7 +52,7 @@
 							<div class="col-lg-6 mb15">
 								<div class="dd-item">
 									<label class="control-label text-left">
-										<span>Số lượng tối đa <b class="text-danger">(*)</b></span>
+										<span>Số lượng tối đa </span>
 									</label>
 									<?php echo form_input('max', set_value('max', (isset($promotion['max'])) ? $promotion['max'] : ''), 'class="form-control " placeholder="" autocomplete="off"');?>
 								</div>

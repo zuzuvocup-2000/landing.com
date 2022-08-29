@@ -75,6 +75,7 @@
                             <th class="text-center" style="width: 100px;">Giá giảm</th>
                             <th class="text-center" style="width: 100px;">Số lượng</th>
                             <th class="text-center" style="width: 120px;">Đã sử dụng</th>
+                            <th class="text-center" style="width:88px;">Đăng nhập</th>
                             <th class="text-center" style="width:88px;">Tình trạng</th>
                             <th class="text-center" style="width:103px;">Thao tác</th>
                         </tr>
@@ -99,9 +100,9 @@
                                 <td  class="text-success" ><?php echo $val['title']; ?></td>
                                 <td class="text-center update_price td-status" >
                                     <div class="view_price text-success">
-                                        <?php echo ($val['price'] != '' || $val['price'] == 0) ? number_format(check_isset($val['price']),0,',','.') : 0 ?>
+                                        <?php echo ($val['discount_value'] != '' || $val['discount_value'] == 0) ? number_format(check_isset($val['discount_value']),0,',','.') : 0 ?>
                                     </div>
-                                    <input type="text" autocomplete="off" name="price" value="<?php echo ($val['price'] != '' || $val['price'] == 0) ? $val['price'] : '0' ?>" data-id="<?php echo $val['id'] ?>" data-field="price" class="int index_update_price form-control" style="text-align: right;display:none; padding: 6px 3px;">
+                                    <input type="text" autocomplete="off" name="discount_value" value="<?php echo ($val['discount_value'] != '' || $val['discount_value'] == 0) ? $val['discount_value'] : '0' ?>" data-id="<?php echo $val['id'] ?>" data-field="discount_value" class="int index_update_price form-control" style="text-align: right;display:none; padding: 6px 3px;">
                                 </td>
                                 <td class="text-center update_price td-status" >
                                     <div class="view_price text-success">
@@ -109,7 +110,18 @@
                                     </div>
                                     <input type="text" autocomplete="off" name="price" value="<?php echo ($val['max'] != '' || $val['max'] == 0) ? $val['max'] : '0' ?>" data-id="<?php echo $val['id'] ?>" data-field="max" class=" index_update_price form-control" style="text-align: right;display:none; padding: 6px 3px;">
                                 </td>
-                                <td class="text-primary text-center"><?php echo $val['count_bill'] ?></td>
+                                <td class="text-primary text-center"><?php echo isset($val['count_bill']) ? $val['count_bill'] : 0 ?></td>
+                                <td class="login-onoffswitch" data-field="login" data-module="<?php echo $module; ?>" data-where="id">
+                                    <div class="switch">
+                                        <div class="onoffswitch" style="margin: auto">
+                                            <input type="checkbox" class="onoffswitch-checkbox login" data-id="<?php echo $val['id'] ?>" id="login-<?php echo $val['id'] ?>" <?php echo ($val['login'] == 1 ? 'checked' : '') ?>>
+                                            <label class="onoffswitch-label" for="login-<?php echo $val['id'] ?>">
+                                                <span class="onoffswitch-inner"></span>
+                                                <span class="onoffswitch-switch"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td class="text-center td-status" data-field="publish" data-module="<?php echo $module; ?>" data-where="id"><?php echo $status; ?></td>
                                 <td class="text-center">
                                     <a type="button" href="<?php echo base_url('backend/promotion/promotion/update/'.$val['id']) ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>

@@ -48,7 +48,7 @@ class Promotion extends BaseController{
 			$page = ($page > $totalPage)?$totalPage:$page;
 			$page = $page - 1;
 			$this->data['promotionList'] = $this->AutoloadModel->_get_where([
-				'select' => 'tb1.id, tb1.title, tb1.price, tb1.max, tb1.promotionid, tb1.publish ,(SELECT COUNT(id) FROM bill WHERE tb1.promotionid = bill.promotionid AND (bill.status = 0 OR bill.status = 1 OR bill.status = 3)) as count_bill',
+				'select' => 'tb1.id, tb1.title, tb1.price, tb1.max, tb1.promotionid, tb1.publish , tb1.login, tb1.discount_value',
 				'table' =>$this->data['module'].' as tb1',
 				'where' => $where,
 				'keyword' => $keyword,
@@ -219,20 +219,24 @@ class Promotion extends BaseController{
 
 	private function store($param = []){
 		helper(['text']);
-		$price = $this->request->getPost('price');
-		$price = str_replace('.', '', $price);
-		$price = (float)$price;
 		$store = [
  			'promotionid' => $this->request->getPost('promotionid'),
  			'title' => $this->request->getPost('title'),
  			'max' => $this->request->getPost('max'),
- 			'price' => $price,
+ 			'type' => $this->request->getPost('type'),
+ 			'image' => $this->request->getPost('image'),
+ 			'discount_value' => $this->request->getPost('discount_value'),
  			'publish' => 1,
 		];
+		$daterange = $this->request->getPost('daterange');
+		if(isset($daterange) && !empty($daterange)){
+			$date_explode = explode('-', $daterange);
+			$store['date_start'] = date('Y-m-d 23:59:59', strtotime(trim($date_explode[1])));
+			$store['date_end'] = date('Y-m-d 00:00:00', strtotime(trim($date_explode[0])));
+		}
  		if($param['method'] == 'create' && isset($param['method'])){	
  			$store['created_at'] = $this->currentTime;
  			$store['userid_created'] = $this->auth['id'];
- 			
  		}else{
  			$store['updated_at'] = $this->currentTime;
  			$store['userid_updated'] = $this->auth['id'];
@@ -244,19 +248,11 @@ class Promotion extends BaseController{
 	private function validation(){
 		$validate = [
 			'title' => 'required',
-			'max' => 'is_natural_no_zero',
-			'price' => 'required',
 			'promotionid' => 'required|min_length[6]|max_length[20]|check_promotionid['.$this->data['module'].']',
 		];
 		$errorValidate = [
 			'title' => [
 				'required' => 'Bạn phải nhập vào trường tiêu đề khuyến mãi!'
-			],
-			'price' => [
-				'is_natural_no_zero' => 'Bạn phải nhập vào số tiền giảm của khuyến mãi!'
-			],
-			'max' => [
-				'required' => 'Bạn phải nhập vào số lượng sử dụng của khuyến mãi!'
 			],
 			'promotionidid' => [
 				'required' => 'Bạn phải nhập vào trường Mã khuyến mãi!',

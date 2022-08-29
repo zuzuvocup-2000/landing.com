@@ -59,3 +59,25 @@ function getRandomString(length) {
 	}
 	return result;
 }
+
+$(document).on('click','.login-onoffswitch', function(){
+	let _this = $(this);
+	let id = _this.parents('tr').attr('data-id');
+	let field = _this.attr('data-field');
+	let $module = _this.attr('data-module');
+	var formURL = 'ajax/promotion/update_field_login';
+	
+	$.post(formURL, {
+		id: id,module: $module, field:field},
+		function(data){
+			if(data == 0){
+				sweet_error_alert('Có vấn đề xảy ra','Vui lòng thử lại')
+			}else{
+				$('.login-onoffswitch').find('input').prop('checked',false)
+				_this.find('input').prop('checked',true)
+			}
+		});
+
+
+	return false;
+});
