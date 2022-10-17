@@ -21,11 +21,19 @@ class AuthFrontend implements FilterInterface
             return redirect()->to(BASE_URL);
         }
         $this->auth = json_decode($this->auth, TRUE);
-
+        $where = [
+            'email' => $this->auth['email']
+        ];
+        if(isset($this->auth['id_social']) && !empty($this->auth['id_social'])){
+            $where = [
+                'id_social' => $this->auth['id_social'],
+                'social' => $this->auth['social'],
+            ];
+        }
         $user = $this->AutoloadModel->_get_where([
             'select' =>'id, email, phone, address',
             'table' => 'member',
-            'where' => ['email' => $this->auth['email']]
+            'where' => $where
         ]);
         if(!isset($user) || is_array($user) == false || count($user) == 0){
             unset($_COOKIE[AUTH.'member']); 

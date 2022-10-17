@@ -1,4 +1,4 @@
-$(document).on('click', '#open_discount', function(){
+$(document).on('click', '.btn-open-discount', function(){
 	let id = $(this).parents('tr').attr('data-id')
 	let module = $(this).attr('data-module')
 	$.post(
@@ -9,11 +9,8 @@ $(document).on('click', '#open_discount', function(){
         },
         function (data) {
             let json = JSON.parse(data);
-            if (json.items != "undefined" && json.items.length) {
-                for (let i = 0; i < json.items.length; i++) {
-                    var option = new Option(json.items[i].text, json.items[i].id, true, true);
-                    _this.append(option).trigger("change");
-                }
+            if (json.response.code == 10){
+                $('.table-discount tbody').html(json.response.html)
             }
         }
     );

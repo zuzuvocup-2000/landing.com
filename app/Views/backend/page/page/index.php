@@ -6,12 +6,12 @@
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
    <div class="col-lg-8">
-      <h2>Quản lý Page tĩnh</h2>
+      <h2>Quản lý Tuyển dụng</h2>
       <ol class="breadcrumb" style="margin-bottom:10px;">
          <li>
             <a href="<?php echo base_url('backend/dashboard/dashboard/index') ?>"><?php echo translate('cms_lang.post.post_home', $language) ?></a>
          </li>
-         <li class="active"><strong>Quản lý Page tĩnh</strong></li>
+         <li class="active"><strong>Quản lý Tuyển dụng</strong></li>
       </ol>
    </div>
 </div>
@@ -21,9 +21,9 @@
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <div class="uk-flex uk-flex-middle">
-                        <h5 class="mb0 ">Quản lý Page tĩnh </h5>
+                        <h5 class="mb0 ">Quản lý Tuyển dụng </h5>
                         <div class="uk-button ml20">
-                            <a href="<?php echo base_url('backend/page/catalogue/index') ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> QL Nhóm Page tĩnh</a>
+                            <a href="<?php echo base_url('backend/page/catalogue/index') ?>" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> QL Nhóm Tuyển dụng</a>
                         </div>
                     </div>
                     <div class="ibox-tools">

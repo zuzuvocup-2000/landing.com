@@ -95,7 +95,9 @@
                             </div>
                         </div>
                     </form>
-                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                    <div class="wrap-table">
+                        <div class="width-table">
+                            <table class="table table-striped table-bordered nd_accordion table-hover dataTables-example">
                         <thead>
                         <tr>
                             <th>
@@ -134,7 +136,7 @@
                                     <a type="button" href="<?php echo base_url('backend/member/member/update/'.$val['id']) ?>" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                                     <a type="button" href="<?php echo base_url('backend/member/member/delete/'.$val['id']) ?>" class="btn btn-info"><i class="fa fa-trash"></i></a>
                                     <a type="button" href="" class="btn btn-danger btn-reset-pass"><i class="fa fa-lock" aria-hidden="true"></i></a>
-                                    <a type="button" href="" data-toggle="modal" data-target="#open_discount" data-module="<?php echo $module; ?>" class="btn btn-warning "><i class="fa fa-percent" aria-hidden="true"></i></a>
+                                    <a type="button" href="" data-toggle="modal" data-target="#open_discount" data-module="<?php echo $module; ?>" class="btn btn-warning btn-open-discount"><i class="fa fa-gift" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                             <?php }}else{ ?>
@@ -144,6 +146,8 @@
                             <?php } ?>
                         </tbody>
                     </table>
+                    </div>
+                    </div>
                     <div id="pagination">
                         <?php echo (isset($pagination)) ? $pagination : ''; ?>
                     </div>
@@ -163,7 +167,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <table class="table table-striped table-bordered table-hover dataTables-example">
+                <table class="table table-striped table-bordered table-hover dataTables-example table-discount">
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 30px;">STT</th>
@@ -175,14 +179,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td>1</td>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>

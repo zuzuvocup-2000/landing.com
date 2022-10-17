@@ -59,12 +59,9 @@
 	    </script>
 		<?php echo $general['analytic_google_analytic'] ?>
 		<?php echo $general['facebook_facebook_pixel'] ?>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 		<?php echo view('frontend/homepage/common/head') ?>
 	</head>
-	<body class="canhcam homepage "  onload="$('body').addClass('loaded');">
+	<body class="canhcam homepage <?php echo isset($module) ? $module.'_wrapper' : '' ?>"  onload="$('body').addClass('loaded');">
 		<div id="loader-wrapper">
             <div id="loader"></div>
             <div class="loader-section section-left"></div>

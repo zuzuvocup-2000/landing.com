@@ -6,6 +6,7 @@ if (! function_exists('authentication')){
 		$model = new AutoloadModel();
 	 	$auth = (isset($_COOKIE[AUTH.'backend'])) ? $_COOKIE[AUTH.'backend'] : '';
 	 	$auth = json_decode($auth, TRUE);
+	 	$user = [];
 	 	$user = $model->_get_where([
 	       	'select' => 'tb1.id, tb1.email, tb1.phone, tb1.address,tb1.image,tb1.fullname,tb1.catalogueid,tb2.title as job, tb2.permission',
 	       	'table' => 'user as tb1',

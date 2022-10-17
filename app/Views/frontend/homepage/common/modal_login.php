@@ -1,3 +1,17 @@
+<?php
+
+    // Login Google
+
+    // require_once 'vendor/autoload.php';
+    // $google_client = new Google_Client();
+    // $google_client->setClientId(GOOGLE_CLIENT_ID);
+    // $google_client->setClientSecret(GOOGLE_SECRET_ID);
+    // $google_client->setRedirectUri(BASE_URL.'login-gmail');
+    // $google_client->addScope('email');
+    // $google_client->addScope('profile');
+    // $url = $google_client->createAuthUrl();
+
+?>
 <div id="login-modal" class="uk-modal">
     <div class="uk-modal-dialog">
         <a href="" class="uk-modal-close uk-close"></a>
@@ -5,14 +19,16 @@
         <div class="login-main">
             <div class="login">
                 <h1 class="heading-1"><span>Đăng nhập</span></h1>
-                <div id="login-phone" class="loginfor"><a href="" title=""><i class="fa fa-mobile" aria-hidden="true"></i> Số điện thoại</a></div>
-                <div id="login-apple" class="loginfor"><a href="" onclick="toastr.warning('Chức năng đang được nâng cấp!');return false;" title=""><i class="fa fa-apple" aria-hidden="true"></i> Apple</a></div>
-                <div id="login-facebook" class="loginfor"><a href="" onclick="toastr.warning('Chức năng đang được nâng cấp!');return false;" title=""><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a></div>
-                <div id="login-google" class="loginfor"><a href="" onclick="toastr.warning('Chức năng đang được nâng cấp!');return false;" title=""><i class="fa fa-google" aria-hidden="true"></i> Gmail</a></div>
-                <form action="" novalidate="novalidate" class="login-form">
+                <div id="login-phone" class="loginfor hide"><a href="" title=""><i class="fa fa-envelope" aria-hidden="true"></i> Email</a></div>
+                <?php /*<div id="login-apple" class="loginfor"><a href="" onclick="toastr.warning('Chức năng đang được nâng cấp!');return false;" title=""><i class="fa fa-apple" aria-hidden="true"></i> Apple</a></div>
+                <div id="login-facebook" class="loginfor">
+                    <a href="" onclick="fblogin()" target="_blank" title=""><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+                </div>
+                <div id="login-google" class="loginfor"><a href="<?php echo $url ?>" target="_blank" title=""><i class="fa fa-google" aria-hidden="true"></i> Gmail</a></div>*/ ?>
+                <form action="" novalidate="novalidate" class="login-form block">
                     <div class="wrap-input mb10">
-                        <label>Số điện thoại</label>
-                        <input autocomplete="on" type="text" required name="phone" value="" class="form-input">
+                        <label>Email</label>
+                        <input autocomplete="on" type="text" required name="email" value="" class="form-input">
                     </div>
                     <div class="wrap-input mb10">
                         <label>Password</label>
@@ -134,7 +150,6 @@
 .forgot .heading-1,
 .register .heading-1{
   text-align: center;
-  font-family: "Work Sans";
   line-height: 1;
   font-weight: bold;
   font-size: 32px;
@@ -171,19 +186,19 @@
   padding: 20px 0;
 }
 .btn-register a{
-  color: rgb(254, 44, 85);
+  color: #fc3;
 }
 .btn-forgot{
   display: none;
 }
 .btn-forgot a{
-  color: rgb(254, 44, 85);
+  color: #fc3;
 }
 .btn-login2{
   display: none;
 }
 .btn-login2 a{
-  color: rgb(254, 44, 85);
+  color: #fc3;
 }
 .uk-open .uk-modal-dialog {
   padding: 0;
@@ -295,3 +310,55 @@
 }
 
 </style>
+<script>
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: "<?php echo FACEBOOK_APP_ID ?>",
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: "v14.0",
+        });
+    };
+
+    (function (d, s, id) {
+        var js,
+            fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+            return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+</script>
+<script>
+    function fblogin() {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                FB.api("/me", function (response) {
+                    let ajaxUrl = "frontend/auth/fb/login";
+                    $.ajax({
+                        method: "POST",
+                        url: ajaxUrl,
+                        data: {data: response},
+                        dataType: "json",
+                        cache: false,
+                        success: function(data){
+                            if($.trim(data) == 1){
+                                toastr.success('Thành công!','Đăng nhập thành công!');
+                            }else{
+                                toastr.error('Có lỗi xảy ra!','Xin vui lòng thử lại!');
+                            }
+                            window.location.reload()
+                        }
+                    });
+                    console.log("Good to see you, " + response.name + ".");
+                });
+            } else {
+                console.log("User cancelled login or did not fully authorize.");
+            }
+        });
+    }
+</script>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>

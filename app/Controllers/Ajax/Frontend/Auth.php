@@ -16,7 +16,7 @@ class Auth extends FrontendController{
 			$user = $this->AutoloadModel->_get_where([
 				'table' => 'member',
 				'select' => 'id, fullname, check_promotion, email, password, salt, image, phone, address, promotion',
-				'where' => ['phone' => $param['phone'],'deleted_at' => 0]
+				'where' => ['email' => $param['email'],'deleted_at' => 0]
 			]);
 			$passwordEncode = password_encode($param['password'], (isset($user['salt']) ? $user['salt'] : ''));
 			if(!isset($user) || is_array($user) == false || count($user) == 0 || $passwordEncode != $user['password']){
@@ -26,7 +26,7 @@ class Auth extends FrontendController{
 				$user_active = $this->AutoloadModel->_get_where([
 					'table' => 'member',
 					'select' => 'id, fullname, email, password, salt',
-					'where' => ['phone' => $param['phone'],'deleted_at' => 0,'publish' => 1]
+					'where' => ['email' => $param['email'],'deleted_at' => 0,'publish' => 1]
 				]);
 				if(!isset($user_active) || is_array($user_active) == false || count($user_active) == 0){
 					$response['message'] = 'Tài khoản của bạn đã bị khoá!';
@@ -58,6 +58,10 @@ class Auth extends FrontendController{
 			 			'data' => $_update
 			 		]);
 
+			 		if($user['check_promotion'] == 0){
+						$this->insert_promotion_first_login($user);
+			 		}
+
 			 		if($flag >0){
 			 			$response['message'] = 'Đăng nhập thành công!';
 						$response['code'] = '10';
@@ -75,6 +79,27 @@ class Auth extends FrontendController{
 		echo json_encode([
 			'response' => $response
 		]);die();
+	}
+
+	public function insert_promotion_first_login($user){
+		$promotion  = $this->AutoloadModel->_get_where([
+			'select' => 'title, image, id',
+			'table' => 'promotion',
+			'where' => [
+				'publish' => 1,
+				'deleted_at' => 0,
+				'login' => 1,
+			],
+		]);
+		if(isset($promotion) && is_array($promotion) && count($promotion)){
+			$this->AutoloadModel->_insert([
+	 			'table' => 'promotion_relationship',
+	 			'data' => [
+	 				'memberid' => $user['id'],
+	 				'promotionid' => $promotion ['id']
+	 			]
+	 		]);
+		}
 	}
 
 	public function change_password(){

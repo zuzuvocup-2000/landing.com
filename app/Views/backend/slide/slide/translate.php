@@ -53,7 +53,7 @@
 																		<div class="row mb5">
 																			<div class="form-row ">
 																				<label>Mô tả</label>
-																				<input disabled  placeholder="Mô tả..." type="text"  class="form-control m-b" name="data[<?php echo $key ?>][description]" value="<?php echo isset($object[$key]['description'])? $object[$key]['description']: ''; ?>">
+																				<input disabled  placeholder="Mô tả..." type="text"  class="form-control m-b ck-editor" name="data[<?php echo $key ?>][description]" value="<?php echo isset($object[$key]['description'])? $object[$key]['description']: ''; ?>">
 																			</div>
 																		</div>
 																		<div class="row mb18 ">
@@ -132,7 +132,7 @@
 																			<div class="row mb5">
 																				<div class="form-row">
 																					<label>Mô tả</label>
-																					<input  placeholder="Mô tả..." type="text"  class="form-control m-b" name="dataTrans[<?php echo $key ?>][description]" value="<?php echo isset($value[$key]['description'])? $value[$key]['description']: '' ?>">
+																					<input  placeholder="Mô tả..." type="text"  class="form-control m-b ck-editor" name="dataTrans[<?php echo $key ?>][description]" value="<?php echo isset($value[$key]['description'])? $value[$key]['description']: '' ?>">
 
 																				</div>
 																			</div>

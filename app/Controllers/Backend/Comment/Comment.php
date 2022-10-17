@@ -69,6 +69,13 @@ class Comment extends BaseController{
 
 	public function create(){
 		$session = session();
+		$flag = $this->authentication->check_permission([
+			'routes' => 'backend/comment/comment/create'
+		]);
+		if($flag == false){
+ 			$session->setFlashdata('message-danger', 'Bạn không có quyền truy cập vào chức năng này!');
+ 			return redirect()->to(BASE_URL.'backend/dashboard/dashboard/index');
+		}
 		$this->data['cat'] = [
 			0 => 'Chọn Module',
 			'article' => 'Bài viết',
@@ -103,6 +110,14 @@ class Comment extends BaseController{
 
 	public function update($id = 0){
 		$id = (int)$id;
+		$session = session();
+		$flag = $this->authentication->check_permission([
+			'routes' => 'backend/comment/comment/update'
+		]);
+		if($flag == false){
+ 			$session->setFlashdata('message-danger', 'Bạn không có quyền truy cập vào chức năng này!');
+ 			return redirect()->to(BASE_URL.'backend/dashboard/dashboard/index');
+		}
 		$this->data[$this->data['module']] = $this->AutoloadModel->_get_where([
 			'select' => 'id, fullname, phone, email, url, publish, comment, module,language, rate, album, language',
 			'table' => $this->data['module'],
@@ -148,7 +163,14 @@ class Comment extends BaseController{
 	}
 
 	public function delete($id = 0){
-
+		$session = session();
+		$flag = $this->authentication->check_permission([
+			'routes' => 'backend/comment/comment/delete'
+		]);
+		if($flag == false){
+ 			$session->setFlashdata('message-danger', 'Bạn không có quyền truy cập vào chức năng này!');
+ 			return redirect()->to(BASE_URL.'backend/dashboard/dashboard/index');
+		}
 		$id = (int)$id;
 		$this->data[$this->data['module']] = $this->AutoloadModel->_get_where([
 			'select' => 'id, fullname, phone, email, url, publish, comment, module,language, rate, album, language',

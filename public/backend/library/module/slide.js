@@ -126,7 +126,6 @@ $(document).ready(function(){
 	function get_data_image(_this){
 		let image = _this.parents('.ui-state-default').find('.value-img-banner').val()
 		let data = _this.parents('.ui-state-default').find('.value-data-banner').val()
-		console.log(data)
 		let _class = _this.attr('data-class')
 		
 		$('.icon-change-image').removeAttr('disabled')

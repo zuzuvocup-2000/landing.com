@@ -28,3 +28,11 @@ $(document).on('click','.submit-form-contact', function(){
     }
 	return false;
 })
+
+$('.owl-slide .owl-carousel').each(function() {
+    let _this = $(this);
+    let data_owl = _this.attr('data-owl');
+    data_owl = window.atob(data_owl);
+    data_owl = JSON.parse(data_owl);
+    _this.owlCarousel(data_owl);
+});

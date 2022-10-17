@@ -95,7 +95,9 @@
                             </div>
                         </div>
                     </form>
-                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                    <div class="wrap-table">
+                        <div class="width-table">
+                            <table class="table table-striped table-bordered nd_accordion table-hover dataTables-example">
                         <thead>
                         <tr>
                             <th>
@@ -142,6 +144,8 @@
                             <?php } ?>
                         </tbody>
                     </table>
+                    </div>
+                    </div>
                     <div id="pagination">
                         <?php echo (isset($pagination)) ? $pagination : ''; ?>
                     </div>

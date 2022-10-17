@@ -16,7 +16,9 @@ class profile extends BaseController
 
 	public function profile($id = 0){
 		$session = session();
-
+		if(empty($this->authentication->check_auth())){
+			return redirect()->to(BASE_URL.'backend/dashboard/dashboard/index');
+		}
 		$id = (int)$id;
 		$this->data[$this->data['module']] = $this->AutoloadModel->_get_where([
 			'select' => 'id, fullname, phone, address, email, catalogueid, birthday, gender, cityid, districtid, wardid,image',

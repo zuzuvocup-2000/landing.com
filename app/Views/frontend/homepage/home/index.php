@@ -1,403 +1,608 @@
-<?php $main_slide = get_slide(['keyword' => 'main-slide' , 'language' => $language ]); ?>
-<?php $about_us = get_slide(['keyword' => 'about-us' , 'language' => $language ]); ?>
-<?php $services = get_slide(['keyword' => 'service' , 'language' => $language ]); ?>
-<?php $portfolio = get_slide(['keyword' => 'portfolio' , 'language' => $language ]); ?>
-<?php $team = get_slide(['keyword' => 'team' , 'language' => $language ]); ?>
-<?php $client = get_slide(['keyword' => 'client' , 'language' => $language ]); ?>
-<?php $partner = get_slide(['keyword' => 'partner' , 'language' => $language ]); ?>
-
-<section id="homepage">
-    <!--Start Home-->
-    <?php if(isset($main_slide) && is_array($main_slide) && count($main_slide)){ ?>
-        <section class="home-bg" id="home" style="background-image: url(<?php echo $main_slide[0]['image'] ?>);">
-            <div class="bg-overlay"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center caption">
-                        <h1 class="banner-headline clip no-margin">
-                            <span class="blc"><?php echo $main_slide[0]['title'] ?> </span>
-                            <span class="banner-words-wrapper" style="width: 322px;">
-                                <b class="font-weight-800 is-hidden"><?php echo $main_slide[0]['alt'] ?></b>
-                                <b class="font-weight-800 is-hidden"><?php echo $main_slide[0]['content'] ?></b>
-                                <b class="font-weight-800 is-visible"><?php echo $main_slide[0]['canonical'] ?></b>
-                            </span>
-                        </h1>
-                        <p class="mb30"><?php echo $main_slide[0]['description'] ?></p>
-                        <div class="social-links xs-margin-20px-top">
-                            <?php if(!empty($general['social_facebook'])){ ?>
-                                <a class=" text-light-gray" href="<?php echo $general['social_facebook'] ?>"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <?php } ?>
-                            <?php if(!empty($general['social_twitter'])){ ?>
-                                <a class=" text-light-gray" href="<?php echo $general['social_twitter'] ?>"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <?php } ?>
-                            <?php if(!empty($general['social_google'])){ ?>
-                                <a class=" text-light-gray" href="<?php echo $general['social_google'] ?>"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            <?php } ?>
-                            <?php if(!empty($general['social_youtube'])){ ?>
-                                <a class=" text-light-gray" href="<?php echo $general['social_youtube'] ?>"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                            <?php } ?>
-                            <?php if(!empty($general['social_link'])){ ?>
-                                <a class=" text-light-gray" href="<?php echo $general['social_link'] ?>"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- <div class="wave-area">
-                <div class="wave"></div>
-                <div class="wave" style="color: #f0f0f2;"></div>
-            </div> -->
-        </section>
-    <?php } ?>
-    <!--End Home-->
-    <!-- Start About -->
-    <?php if(isset($about_us) && is_array($about_us) && count($about_us)){ ?>
-        <section class="section bg-light" id="about-us">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center section_title">
-                            <div class="section_title_border">
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                                <p class="sec_small_title mb-0 text-custom d-inline-block"><?php echo $about_us[0]['cat_title'] ?></p>
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                            </div>
-                            <h3 class="font-weight-bold mt-3 mb-0"><?php echo $about_us[0]['title'] ?></h3>
-                            <p class="text-muted sec_subtitle mx-auto mt-3"><?php echo $about_us[0]['cat_description'] ?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5 mb-5 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="mt-3">
-                            <h3 class="about_title"><?php echo $about_us[0]['description'] ?></h3>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="mt-3">
-                            <p class="about_sec_dec text-muted">
-                                <?php echo $about_us[0]['content'] ?>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End About-->
-        <!-- Start About Images -->
-        <section class="pb-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="about_img mb-5 mx-auto">
-                            <img src="<?php echo $about_us[0]['image'] ?>" alt="" class="img-fluid mx-auto d-block rounded">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php } ?>
-    <!-- End About Images -->
-    <!-- Start Services -->
-    <?php if(isset($services) && is_array($services ) && count($services )){ ?>
-        <section id="services">
-            <div class="container">
-                <div class="row">
-                    <?php foreach ($services  as $key => $value) { ?>
-                        <div class="col-lg-4">
-                            <div class="ser_box mt-3">
-                                <div class="ser_icon">
-                                    <?php if($key % 3 == 0){ ?>
-                                    <i class="mdi mdi-apple-keyboard-command"></i>
-                                    <?php }else if($key % 3 == 1){ ?>
-                                    <i class="mdi mdi-asterisk"></i>
-                                    <?php }else{ ?>
-                                    <i class="mdi mdi-biohazard"></i>
-                                    <?php } ?>
-                                </div>
-                                <div class="ser_content mt-3">
-                                    <h5 class="mb-0"><?php echo $value['title'] ?></h5>
-                                    <p class="text-muted mt-3"><?php echo $value['description'] ?></p>
-                                </div>
-                                <div class="bgser_icon">
-                                    <?php if($key % 3 == 0){ ?>
-                                    <i class="mdi mdi-apple-keyboard-command mdi-spin"></i>
-                                    <?php }else if($key % 3 == 1){ ?>
-                                    <i class="mdi mdi-asterisk mdi-spin"></i>
-                                    <?php }else{ ?>
-                                    <i class="mdi mdi-biohazard mdi-spin"></i>
-                                    <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </section>
-        <!-- End Services -->
-        <!-- Start CTA -->
-        <section class="ser_title_top bg-light section">
-            <div class="container">
-                <div class="row mt-5">
-                    <div class="col-lg-12">
-                        <div class="text-center cta_fir mt-3">
-                            <h2><?php echo $services[0]['cat_title'] ?></h2>
-                            <p class="text-muted mt-3"><?php echo $services[0]['cat_description'] ?></p>
-                            <!-- <div class="mt-4">
-                                <a href="#" class="btn btn-custom">Learn More</a>
-                            </div> -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php } ?>
-    <!-- End CTA -->
-    <!-- Start Work -->
-    <?php if(isset($portfolio) && is_array($portfolio ) && count($portfolio )){ ?>
-        <section class="section bg-light" id="portfolio">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center section_title">
-                            <div class="section_title_border">
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                                <p class="sec_small_title mb-0 text-custom d-inline-block">Our Work</p>
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                            </div>
-                            <h3 class="font-weight-bold mt-3 mb-0"><?php echo $portfolio[0]['cat_title'] ?></h3>
-                            <p class="text-muted sec_subtitle mx-auto mt-3"><?php echo $portfolio[0]['cat_description'] ?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <div class="col-lg-6">
-                        <?php foreach ($portfolio as $key => $value) { 
-                            if($key % 2 == 0){
-                        ?>
-                            <div class="work_box mt-3">
-                                <div class="work_img">
-                                    <a href="<?php echo $value['canonical'] ?>" class="img-zoom">
-                                        <img src="<?php echo $value['image'] ?>" alt="work" class="img-fluid mx-auto d-block rounded">
-                                    </a>
-                                </div>
-                                <div class="work_caption ml-3 mt-3">
-                                    <p class="text-muted mb-0"><div class="work_cap_line"></div><?php echo $value['description'] ?></p>
-                                    <a href="<?php echo $value['canonical'] ?>" class="text-capitalize d-block ml-4"><?php echo $value['title'] ?></a>
-                                    <div class="btn-more"><a href="<?php echo $value['canonical'] ?>" title="">Read More</a></div>
-                                </div>
-                            </div>
-                        <?php }} ?>
-                    </div>
-                    <div class="col-lg-6">
-                        <?php foreach ($portfolio as $key => $value) { 
-                            if($key % 2 == 1){
-                        ?>
-                            <div class="work_box <?php echo $key == 1 ? 'work_top_mar' : 'mt-3' ?>">
-                                <div class="work_img">
-                                    <a href="<?php echo $value['canonical'] ?>" class="img-zoom">
-                                        <img src="<?php echo $value['image'] ?>" alt="work" class="img-fluid mx-auto d-block rounded">
-                                    </a>
-                                </div>
-                                <div class="work_caption ml-3 mt-3">
-                                    <p class="text-muted mb-0"><div class="work_cap_line"></div><?php echo $value['description'] ?></p>
-                                    <a href="<?php echo $value['canonical'] ?>" class="text-capitalize d-block ml-4"><?php echo $value['title'] ?></a>
-                                    <div class="btn-more"><a href="<?php echo $value['canonical'] ?>" title="">Read More</a></div>
-                                </div>
-                            </div>
-                        <?php }} ?>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php } ?>
-    <!-- Start Team -->
-    <?php if(isset($portfolio) && is_array($portfolio ) && count($portfolio )){ ?>
-        <section class="section bg-light" id="team">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center section_title">
-                            <div class="section_title_border">
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                                <p class="sec_small_title mb-0 text-custom d-inline-block">Our Team</p>
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                            </div>
-                            <h3 class="font-weight-bold mt-3 mb-0"><?php echo $team[0]['cat_title'] ?></h3>
-                            <p class="text-muted sec_subtitle mx-auto mt-3"><?php echo $team[0]['cat_description'] ?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <?php foreach ($team as $value) { ?>
-                        <div class="col-lg-3">
-                            <div class="team_boxes_border mt-3">
-                                <div class="team_images">
-                                    <img src="<?php echo $value['image'] ?>" alt="" class="img-fluid mx-auto d-block rounded">
-                                </div>
-                                <div class="team_content ml-3 mr-3 text-center">
-                                    <h5 class="font-weight-bold mb-1"><?php echo $value['title'] ?></h5>
-                                    <p class="mb-0"><?php echo $value['description'] ?></p>
-                                    <div class="mt-3">
-                                        <ul class="list-inline follow_team_social mb-0">
-                                            <li class="list-inline-item"><a href="<?php echo $value['alt'] ?>"><i class="mdi mdi-facebook"></i></a></li>
-                                            <li class="list-inline-item"><a href="mailto:<?php echo $value['canonical'] ?>"><i class="mdi mdi-google"></i></a></li>
-                                            <li class="list-inline-item"><a href="<?php echo $value['content'] ?>"><i class="mdi mdi-twitter"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </section>
-    <?php } ?>
-    <!-- End Team -->
-    <!-- Start Client -->
-    <?php if(isset($client) && is_array($client ) && count($client )){ ?>
-        <section id="client">
-            <div class="container-fluid">
-                <div class="row position-relative">
-                    <div class="col-lg-5 offset-lg-7 client_img_bg">
-                        &nbsp;
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="client_bg_pad">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="text-center section_title">
-                                        <div class="section_title_border">
-                                            <div class="f-border"></div>
-                                            <div class="s-border"></div>
-                                            <div class="f-border"></div>
-                                            <p class="sec_small_title mb-0 text-custom d-inline-block">Client Feedback</p>
-                                            <div class="f-border"></div>
-                                            <div class="s-border"></div>
-                                            <div class="f-border"></div>
-                                        </div>
-                                        <h3 class="font-weight-bold mt-3 mb-0"><?php echo $client[0]['cat_title'] ?></h3>
-                                        <p class="text-muted sec_subtitle mx-auto mt-3"><?php echo $client[0]['cat_description'] ?></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row justify-content-center mt-5">
-                                <?php
-                                    $owlInit = [
-                                        'nav' => false,
-                                        'dots' => true,
-                                        'loop' => true,
-                                        'margin' => 10,
-                                        'items' => 1,
-                                        'autoplay' => true
-                                    ];
-                                ?>
-                                <div class="col-lg-8">
-                                    <div class="owl-slide">
-                                        <div class="owl-carousel" data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
-                                            <?php foreach ($client as $key => $value) {
-                                                if($key == 0) continue;
-                                            ?>
-                                                <div class="text-center testi_boxes text-white text  bg-custom  mt-3">
-                                                    <div class="testi_icon_center">
-                                                        <i class="pe-7s-smile"></i>
-                                                    </div>
-                                                    <p class="client_review text-white text-center"><?php echo $value['description'] ?></p>
-                                                    <p class="client_name text-center mb-0 mt-3">- <?php echo $value['title'] ?></p>
-                                                    <p class="mb-0 client_user"><?php echo $value['alt'] ?></p>
-                                                </div>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    <?php } ?>
-    <!-- End Client -->
-    <!-- Start Logo -->
-    <?php  if(isset($partner) && is_array($partner ) && count($partner )){  ?>
-        <section class="img_logo section">
-            <div class="container bg-light rounded">
-                <div class="row">
-                    <?php foreach ($partner as $value) { ?>
-                        <div class="col-lg-3">
-                            <div class="logo_img">
-                                <img src="<?php echo $value['image'] ?>" alt="logo-img" class="mx-auto img-fluid d-block">
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </section>
-    <?php } ?>
-    <!-- End Logo -->
-    <!-- Start Blog -->
-    <?php if(isset($articleCatalogueList) && is_array($articleCatalogueList) &&count($articleCatalogueList)){ ?>
-        <section class="section bg-light" id="blog">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center section_title">
-                            <div class="section_title_border">
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                                <p class="sec_small_title mb-0 text-custom d-inline-block">Our News</p>
-                                <div class="f-border"></div>
-                                <div class="s-border"></div>
-                                <div class="f-border"></div>
-                            </div>
-                            <h3 class="font-weight-bold mt-3 mb-0"><?php echo $articleCatalogueList['title'] ?></h3>
-                            <p class="text-muted sec_subtitle mx-auto mt-3"><?php echo strip_tags(base64_decode($articleCatalogueList['description'])) ?></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <?php foreach ($articleCatalogueList['data'] as $value) { ?>
-                        <div class="col-lg-4">
-                            <div class="blog_bor_boxes mt-3 rounded p-2">
-                                <div class="blog_images">
-                                    <img src="<?php echo $value['image'] ?>" alt="blog" class="img-fluid rounded mx-auto d-block">
-                                </div>
-                                <div class="blog_content bg-white rounded p-3 mt-2">
-                                    <div class="media blog_user">
-                                        <img src="<?php echo $value['image_user'] ?>" alt="" class="img-fluid mr-3 d-block rounded-circle">
-                                        <div class="media-body pt-2 align-middle">
-                                            <h5 class="mb-1"><a href="#"><?php echo $value['fullname'] ?></a></h5>
-                                            <p><?php echo date('d M, Y', strtotime($value['created_at'])) ?></p>
-                                        </div>
-                                    </div>
-                                    <div class="blog_text mt-3">
-                                        <h5><?php echo $value['title'] ?></h5>
-                                        <p class="text-muted mt-3 mb-0"><?php echo strip_tags(base64_decode($value['description'])) ?></p>
-                                        <div class="read_more mt-3">
-                                            <div class="blog_border"></div><a href="<?php echo $value['canonical'].HTSUFFIX ?>" class="text-dark text-uppercase"> Read More</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-            </div>
-        </section>
-    <?php } ?>
-    <!-- End Blog -->
-</section>
+<?php $main_slide = get_slide(['keyword' => 'banner-home' , 'language' => $language ]); ?>
+<div class="page-home">
+	<?php if(isset($main_slide) && is_array($main_slide) && count($main_slide)){ ?>
+		<div class="panel-slide">
+			<?php
+			$owlInit = [
+			'nav' => true,
+			'dots' => false,
+			'loop' => true,
+			'margin' => 0,
+			'responsive' => array(
+			0 => array(
+			'items' => 1,
+			),
+			480 => array(
+			'items' => 1,
+			),
+			768 => array(
+			'items' => 1,
+			),
+			960 => array(
+			'items' => 1,
+			),
+			),
+			];
+			?>
+			<div class="owl-slide">
+				<div class="owl-carousel owl-theme " data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
+					<?php foreach ($main_slide as $key => $value) { ?>
+						<div class="item">
+							<div class="thumb">
+								<a href="<?php echo $value['canonical'] ?>" title="slide" class="image-slide img-cover">
+									<img src="<?php echo $value['image'] ?>" alt="">
+								</a>
+							</div>
+						</div>
+					<?php } ?>
+				</div>
+			</div>
+			<div class="form-booking">
+				<div class="panel-head">
+					<div class="title">Đặt lịch giữ chỗ chỉ 30 giây</div>
+					<div class="sub-title">Cắt xong trả tiền, hủy lịch không sao</div>
+				</div>
+				<div class="panel-body">
+					<form action="" method="">
+						<div class="uk-flex uk-flex-middle">
+							<div class="form-input">
+								<input placeholder="Nhập SDT để đặt lịch" type="text" class="my-input" value="">
+							</div>
+							<div class="btn-booking">
+								<button type="button" name="button">ĐẶT <span>LỊCH </span>NGAY</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	<?php } ?>
+	<div class="panel-experience">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">Trải nghiệm dịch vụ</div>
+							<div class="sub-title">Thư giãn 30 phút và bạn sẽ tỏa sáng</div>
+						</a>
+					</div>
+					<div class="head-right">
+						<a href="" title="read-all" class="read-all"><span>Xem tất cả</span> <i class="fa fa-chevron-right ml10" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="banner-wraper">
+					<a href="#" title="banner" class="thumb img-cover img-zoomin">
+						<img src="resources/img/banner-1.jpg" alt="">
+					</a>
+				</div>
+				<div class="service-list">
+					<div class="uk-grid uk-grid-small uk-flex uk-flex-middle" >
+						<div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+							<div class="service-item">
+								<a href="#" title="service-item" >
+									<div class="uk-flex uk-flex-middle" >
+										<div class="thumb img-cover img-zoomin">
+											<img src="resources/img/service-item.jpg" alt="">
+										</div>
+										<div class="service-content">
+											<div class="title">Uốn nhập khẩu hàn siêu bền tóc</div>
+											<div class="sub-title">Chỉ từ 206k</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+							<div class="service-item">
+								<a href="#" title="service-item" >
+									<div class="uk-flex uk-flex-middle" >
+										<div class="thumb img-cover img-zoomin">
+											<img src="resources/img/service-item.jpg" alt="">
+										</div>
+										<div class="service-content">
+											<div class="title">Cắt gội massage</div>
+											<div class="sub-title">Bảng giá 2022 (hấp dẫn)</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+							<div class="service-item">
+								<a href="#" title="service-item" >
+									<div class="uk-flex uk-flex-middle" >
+										<div class="thumb img-cover img-zoomin">
+											<img src="resources/img/service-item.jpg" alt="">
+										</div>
+										<div class="service-content">
+											<div class="title">Cắt gội massage</div>
+											<div class="sub-title">Bảng giá 2022 (hấp dẫn)</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+							<div class="service-item">
+								<a href="#" title="service-item" >
+									<div class="uk-flex uk-flex-middle" >
+										<div class="thumb img-cover img-zoomin">
+											<img src="resources/img/service-item.jpg" alt="">
+										</div>
+										<div class="service-content">
+											<div class="title">Cắt gội massage</div>
+											<div class="sub-title">Bảng giá 2022 (hấp dẫn)</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-slide-2item">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">Hành trình tỏa sáng</div>
+							<div class="sub-title">Câu chuyện chân thực từ khách hàng</div>
+						</a>
+					</div>
+					<div class="head-right">
+						<a href="" title="read-all" class="read-all"><span>Xem tất cả</span> <i class="fa fa-chevron-right ml10" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<?php
+				$owlInit = [
+				'nav' => true,
+				'dots' => false,
+				'loop' => true,
+				'margin' => 20,
+				'responsive' => array(
+				0 => array(
+				'items' => 1,
+				),
+				480 => array(
+				'items' => 1.5,
+				),
+				768 => array(
+				'items' => 2,
+				),
+				960 => array(
+				'items' => 2,
+				),
+				),
+				];
+				?>
+				<div class="owl-slide">
+					<div class="owl-carousel owl-theme " data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
+						<div class="item">
+							<div class="thumb">
+								<a href="" title="slide" class="image-slide img-cover img-zoomin">
+									<img src="resources/img/guest-1.jpg" alt="">
+								</a>
+							</div>
+							<div class="thumb-info">
+								<a href="" title="" class="title">
+									Can đảm thay đổi mái tóc 7 năm, nam sinh Kiến Trúc lột xác kiểu tóc mới cực đẹp
+								</a>
+							</div>
+						</div>
+						<div class="item">
+							<div class="thumb">
+								<a href="" title="slide" class="image-slide img-cover img-zoomin">
+									<img src="resources/img/guest-2.jpg" alt="">
+								</a>
+							</div>
+							<div class="thumb-info">
+								<a href="" title="" class="title">
+									Bạn sinh viên IT lột xác thành hot boy vạn người mê
+								</div>
+							</a>
+						</div>
+						<div class="item">
+							<div class="thumb">
+								<a href="" title="slide" class="image-slide img-cover img-zoomin">
+									<img src="resources/img/guest-1.jpg" alt="">
+								</a>
+							</div>
+							<div class="thumb-info">
+								<a href="" title="" class="title">
+									Can đảm thay đổi mái tóc 7 năm, nam sinh Kiến Trúc lột xác kiểu tóc mới cực đẹp
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-angel">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">30Shine’s Angels</div>
+							<div class="sub-title">Những thiên thần xinh đẹp hết lòng vì khách hàng</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<?php
+				$owlInit = [
+				'nav' => true,
+				'dots' => false,
+				'loop' => true,
+				'margin' => 20,
+				'responsive' => array(
+				0 => array(
+				'items' => 1,
+				),
+				480 => array(
+				'items' => 1.5,
+				),
+				768 => array(
+				'items' => 2.5,
+				),
+				960 => array(
+				'items' => 3.5,
+				),
+				),
+				];
+				?>
+				<div class="owl-slide">
+					<div class="owl-carousel owl-theme " data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
+						<?php for($i = 1; $i <= 5; $i++){ ?>
+						<div class="item">
+							<div class="thumb">
+								<a href="" title="slide" class="image-slide img-cover img-zoomin">
+									<img src="resources/img/angel-<?php echo $i ?>.jpg" alt="">
+								</a>
+								<div class="contact-thumb">
+									<a href="#" title="book lịch ngay"><i class="fa fa-calendar-check-o mr10"></i>Book lịch ngay</a>
+								</div>
+							</div>
+							<div class="thumb-info">
+								<a href="" title="" class="title">
+									Can đảm thay đổi mái tóc 7 năm, nam sinh Kiến Trúc lột xác kiểu tóc mới cực đẹp
+								</div>
+							</a>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-stylist">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">30Shine’s Stylist</div>
+							<div class="sub-title">Đội ngũ Stylist dày dạn kinh nghiệm, tư vấn nhiệt tình để khách hàng có kiểu tóc ưng ý nhất</div>
+						</a>
+					</div>
+					<div class="head-right">
+						<a href="" title="read-all" class="read-all"><span>Xem tất cả</span> <i class="fa fa-chevron-right ml10" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<?php
+				$owlInit = [
+				'nav' => true,
+				'dots' => false,
+				'loop' => true,
+				'margin' => 20,
+				'responsive' => array(
+				0 => array(
+				'items' => 1,
+				),
+				480 => array(
+				'items' => 1.5,
+				),
+				768 => array(
+				'items' => 2.5,
+				),
+				960 => array(
+				'items' => 3.5,
+				),
+				),
+				];
+				?>
+				<div class="owl-slide">
+					<div class="owl-carousel owl-theme " data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
+						<?php for($i = 1; $i <= 5; $i++){ ?>
+						<div class="item">
+							<div class="thumb">
+								<a href="" title="slide" class="image-slide img-cover img-zoomin">
+									<img src="resources/img/stylist-<?php echo $i ?>.jpg" alt="">
+								</a>
+							</div>
+							<div class="thumb-info">
+								<a href="" title="" class="title">
+									Nguyễn Đỗ Bảo Thanh - 236 D. Bá Trạc, Quận 8, TP. Hồ Chí Minh
+								</a>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-equipment">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">Không gian và thiết bị</div>
+							<div class="sub-title">Nạp năng lượng với trải nghiệm không gian mở</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="banner-wraper">
+					<div class="thumb img-cover">
+						<img src="resources/img/equipment-1.jpg" alt="">
+					</div>
+					<div class="sub-banner">Phá vỡ giới hạn của một tiệm tóc truyền thống, 30Shine mang đến không gian trải nghiệm hoàn toàn mới với diện tích lớn trên 200m2/ 16 ghế cắt. Tất cả đều được đặt tại vị trí dễ tìm trên những con phố lớn, hòa vào cuộc sống sôi động của người đàn ông hiện đại.</div>
+				</div>
+				<div class="service-list">
+					<div class="uk-grid uk-grid-small uk-flex uk-flex-middle" >
+						<?php for($i = 1; $i <= 4; $i++){ ?>
+						<div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+							<div class="service-item">
+								<a href="#" title="service-item" >
+									<div class="uk-flex uk-flex-middle" >
+										<div class="thumb img-cover img-zoomin">
+											<img src="resources/img/equipment-2.jpg" alt="">
+										</div>
+										<div class="service-content">
+											<div class="title">Salon rộng lớn dễ tìm</div>
+											<div class="sub-title">Không gian mở & kết nối</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<?php }?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-trust">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">An tâm & Tin tưởng</div>
+							<div class="sub-title">Cam kết phòng dịch tối đa & mỹ phẩm chính hãng</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<?php
+				$owlInit = [
+				'nav' => true,
+				'dots' => false,
+				'loop' => true,
+				'margin' => 20,
+				'responsive' => array(
+				0 => array(
+				'items' => 1,
+				),
+				480 => array(
+				'items' => 1.5,
+				),
+				768 => array(
+				'items' => 2,
+				),
+				960 => array(
+				'items' => 3,
+				),
+				),
+				];
+				?>
+				<div class="owl-slide">
+					<div class="owl-carousel owl-theme " data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
+						<?php for($i = 1; $i <= 3; $i++){ ?>
+						<div class="item">
+							<div class="thumb">
+								<a href="" title="slide" class="image-slide img-cover img-zoomin">
+									<img src="resources/img/trust-1.jpg" alt="">
+								</a>
+							</div>
+							<div class="thumb-info">
+								<a href="" title="" class="title">
+									Mỹ phẩm & sản phẩm - Cam kết chất lượng - Đảm bảo xuất xứ
+								</a>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-endow">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">Ưu đãi</div>
+							<div class="sub-title">Quà tặng, chiết khấu đặc biệt cập nhật liên tục</div>
+						</a>
+					</div>
+					<div class="head-right">
+						<a href="" title="read-all" class="read-all"><span>Xem tất cả</span> <i class="fa fa-chevron-right ml10" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<?php
+				$owlInit = [
+				'nav' => true,
+				'dots' => false,
+				'loop' => true,
+				'margin' => 20,
+				'responsive' => array(
+				0 => array(
+				'items' => 1,
+				),
+				480 => array(
+				'items' => 1.5,
+				),
+				768 => array(
+				'items' => 2.5,
+				),
+				960 => array(
+				'items' => 3.5,
+				),
+				),
+				];
+				?>
+				<div class="owl-slide">
+					<div class="owl-carousel owl-theme " data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
+						<?php for($i = 1; $i <= 5; $i++){ ?>
+						<div class="item">
+							<div class="thumb">
+								<a href="" title="slide" class="image-slide img-cover img-zoomin">
+									<img src="resources/img/endow-1.png" alt="">
+								</a>
+							</div>
+							<div class="thumb-info">
+								<a href="" title="" class="title">
+									MUA SKIN&DR TẶNG MẶT NẠ HOT HIT
+								</a>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-lightbox">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">Shine Moment</div>
+							<div class="sub-title">Cùng lan tỏa những phút giây tỏa sáng tại 30Shine</div>
+						</a>
+					</div>
+					<div class="head-right">
+						<a href="" title="read-all" class="read-all"><span>Xem tất cả</span> <i class="fa fa-chevron-right ml10" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<?php
+				$owlInit = [
+				'nav' => true,
+				'dots' => false,
+				'loop' => true,
+				'margin' => 20,
+				'responsive' => array(
+				0 => array(
+				'items' => 1,
+				),
+				480 => array(
+				'items' => 2,
+				),
+				768 => array(
+				'items' => 3,
+				),
+				960 => array(
+				'items' => 4,
+				),
+				),
+				];
+				?>
+				<div class="owl-slide">
+					<div class="owl-carousel owl-theme " data-owl="<?php echo base64_encode(json_encode($owlInit)); ?>">
+						<?php for($i = 1; $i <= 5; $i++){ ?>
+						<div class="item">
+							<div class="thumb">
+								<a href="resources/img/lightbox-<?php echo $i ?>.jpg" title="slide" class="image-slide img-cover img-zoomin" data-uk-lightbox="{group:'group-shine'}">
+									<img src="resources/img/lightbox-<?php echo $i ?>.jpg" alt="">
+								</a>
+							</div>
+						</div>
+						<?php } ?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-commit">
+		<div class="uk-container uk-container-center">
+			<div class="panel-head">
+				<div class="uk-flex uk-flex-middle uk-flex-space-between">
+					<div class="head-left">
+						<a href="#" title="service">
+							<div class="title">Cam kết 30shine Care</div>
+							<div class="sub-title">Sự hài lòng của anh là ưu tiên hàng đầu của 30Shine</div>
+						</a>
+					</div>
+					<div class="head-right">
+						<a href="" title="read-all" class="read-all"><span>Xem tất cả</span> <i class="fa fa-chevron-right ml10" aria-hidden="true"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<div class="banner-wraper">
+					<div class="thumb img-cover">
+						<img src="resources/img/commit-1.jpg" alt="">
+					</div>
+					<div class="sub-banner">
+						<div class="title">VÌ CHẤT LƯỢNG PHỤC VỤ LÀ HÀNG ĐẦU</div>
+						<div class="sub-title">Áp dụng tại salon bất kỳ toàn hệ thống 30Shine</div>
+					</div>
+				</div>
+				<div class="service-list">
+					<div class="uk-grid uk-grid-small uk-flex uk-flex-middle" >
+						<?php for($i = 1; $i <= 4; $i++){ ?>
+						<div class="uk-width-small-1-1 uk-width-medium-1-2 uk-width-large-1-4">
+							<div class="service-item">
+								<a href="#" title="service-item" >
+									<div class="uk-flex uk-flex-middle" >
+										<div class="thumb img-cover img-zoomin">
+											<img src="resources/img/commit-2.png" alt="">
+										</div>
+										<div class="service-content">
+											<div class="title">7 ngày</div>
+											<div class="sub-title">Chỉnh sửa tóc miễn phí</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<?php }?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

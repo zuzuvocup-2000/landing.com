@@ -195,8 +195,6 @@ class Promotion extends BaseController{
 		$publish = $this->request->getGet('publish');
 		if(isset($publish)){
 			$where['tb1.publish'] = $publish;
-		}else{
-			$where['tb1.publish'] = 1;
 		}
 
 		$deleted_at = $this->request->getGet('deleted_at');
@@ -231,8 +229,8 @@ class Promotion extends BaseController{
 		$daterange = $this->request->getPost('daterange');
 		if(isset($daterange) && !empty($daterange)){
 			$date_explode = explode('-', $daterange);
-			$store['date_start'] = date('Y-m-d 23:59:59', strtotime(trim($date_explode[1])));
-			$store['date_end'] = date('Y-m-d 00:00:00', strtotime(trim($date_explode[0])));
+			$store['date_end'] = date('Y-m-d 23:59:59', strtotime(str_replace('/', '-', trim($date_explode[1]))));
+			$store['date_start'] = date('Y-m-d 00:00:00', strtotime(str_replace('/', '-', trim($date_explode[0]))));
 		}
  		if($param['method'] == 'create' && isset($param['method'])){	
  			$store['created_at'] = $this->currentTime;

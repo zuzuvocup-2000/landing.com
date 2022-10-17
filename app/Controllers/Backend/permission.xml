@@ -144,8 +144,8 @@
 			<param>backend/product/warehouse/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
-	<permissions>
+	</permissions> -->
+	<!-- <permissions>
 		<title>Danh sách - [Landingpage]</title>
 		<item>
 			<param>backend/landingpage/landingpage/index</param>
@@ -202,7 +202,7 @@
 			<description>Xóa</description>
 		</item>
 	</permissions>
-	<!-- <permissions>
+	<permissions>
 		<title>Nhóm - [Nội dung tĩnh]</title>
 		<item>
 			<param>backend/page/catalogue/index</param>
@@ -277,7 +277,7 @@
 			<param>backend/media/media/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions> -->
+	</permissions>
 	<!-- <permissions>
 		<title>Nhóm - [Tài liệu]</title>
 		<item>
@@ -534,7 +534,7 @@
 			<description>Xóa</description>
 		</item>
 	</permissions>
-	<permissions>
+	<!-- <permissions>
 		<title>Quản lý - [Khuyến mãi]</title>
 		<item>
 			<param>backend/promotion/promotion/index</param>
@@ -552,7 +552,7 @@
 			<param>backend/promotion/promotion/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions>
+	</permissions> -->
 	<!-- <permissions>
 		<title>Quản lý - [Comment]</title>
 		<item>
@@ -660,7 +660,7 @@
 			<description>Sửa Widget</description>
 		</item>
 	</permissions> -->
-	<!-- <permissions>
+	<permissions>
 		<title>Ngôn Ngữ</title>
 		<item>
 			<param>backend/language/language/index</param>
@@ -678,7 +678,7 @@
 			<param>backend/language/language/delete</param>
 			<description>Xóa</description>
 		</item>
-	</permissions> -->
+	</permissions>
 	
 	<permissions>
 		<title>Quản lý - [Bản dịch]</title>

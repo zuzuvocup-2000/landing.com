@@ -50,7 +50,7 @@
 										<span><?php echo translate('cms_lang.post_catalogue.postcat_description', $language) ?></span>
 									</label>
 								</div>
-								<?php echo form_textarea('description_catalogue', htmlspecialchars_decode(html_entity_decode(set_value('description_catalogue', (isset($slide_catalogue['description'])) ? $slide_catalogue['description'] : ''))), 'class="form-control"  placeholder="" readonly autocomplete="off"');?>
+								<?php echo form_textarea('description_catalogue', htmlspecialchars_decode(html_entity_decode(set_value('description_catalogue', (isset($slide_catalogue['description'])) ? $slide_catalogue['description'] : ''))), 'class="form-control ck-editor" id="description_translate"  placeholder="" readonly autocomplete="off"');?>
 
 							</div>
 						</div>
@@ -133,7 +133,7 @@
 											<span><?php echo translate('cms_lang.post_catalogue.postcat_description', $language) ?></span>
 										</label>
 									</div>
-									<?php echo form_textarea('description_catalogue', htmlspecialchars_decode(html_entity_decode(set_value('description_catalogue', (isset($slide_catalogue_translate['description'])) ? $slide_catalogue_translate['description'] : ''))), 'class="form-control"  placeholder="" autocomplete="off"');?>
+									<?php echo form_textarea('description_catalogue', htmlspecialchars_decode(html_entity_decode(set_value('description_catalogue', (isset($slide_catalogue_translate['description'])) ? $slide_catalogue_translate['description'] : ''))), 'class="form-control ck-editor" id="description" placeholder="" autocomplete="off"');?>
 
 								</div>
 							</div>

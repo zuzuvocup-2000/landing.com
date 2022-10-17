@@ -89,11 +89,34 @@ class UserRules {
 		return true;
 	}
 
+	public function check_pass_member($oldPass = 0, $id = ''): bool{
+
+		$this->user = $this->AutoloadModel->_get_where([
+			'table' => 'member',
+			'select' => 'id, fullname, email,password, salt',
+			'where' => ['id' => $id]
+		]);
+		$passwordEncode = password_encode($oldPass, $this->user['salt']);
+		
+		if(!isset($this->user) || is_array($this->user) == false || count($this->user) == 0){
+			return false;
+		}
+		if($passwordEncode != $this->user['password']){
+			return  false;
+		}
+		return true;
+	}
+
 	public function checkActive($password = '', $email = ''){
 		$this->user = $this->AutoloadModel->_get_where([
-			'table' => 'user',
-			'select' => 'id, fullname, email, password, salt',
-			'where' => ['email' => $email,'deleted_at' => 0,'publish' => 1]
+			'table' => 'user as tb1',
+			'select' => 'tb1.id, tb1.fullname, tb1.email, tb1.password, tb1.salt',
+			'where' => ['tb1.email' => $email,'tb1.deleted_at' => 0,'tb1.publish' => 1,'tb2.deleted_at' => 0,'tb2.publish' => 1],
+			'join' => [
+				[
+					'user_catalogue as tb2', 'tb1.catalogueid = tb2.id', 'inner'
+				]
+			]
 		]);
 
 		if(!isset($this->user) || is_array($this->user) == false || count($this->user) == 0){

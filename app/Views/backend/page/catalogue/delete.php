@@ -4,12 +4,12 @@
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
 	<div class="col-lg-10">
-		<h2>Xóa nhóm Page: <?php echo $page_catalogue['title'] ?></h2>
+		<h2>Xóa nhóm Tuyển dụng: <?php echo $page_catalogue['title'] ?></h2>
 		<ol class="breadcrumb">
 			<li>
 				<a href="<?php echo site_url('admin'); ?>"><?php echo translate('cms_lang.post_catalogue.postcat_home', $language) ?></a>
 			</li>
-			<li class="active"><strong>Xóa nhóm Page</strong></li>
+			<li class="active"><strong>Xóa nhóm Tuyển dụng</strong></li>
 		</ol>
 	</div>
 </div>

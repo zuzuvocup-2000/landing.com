@@ -302,7 +302,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="ibox mb20">
+				<div class="ibox mb20 hidden">
 					<div class="ibox-title uk-flex-middle uk-flex uk-flex-space-between">
 						<h5 class="choose-image" style="cursor: pointer;margin:0;">Template hiển thị Website</h5>
 					</div>
@@ -313,7 +313,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="ibox mb20">
+				<div class="ibox mb20 hidden">
 					<div class="ibox-title uk-flex-middle uk-flex uk-flex-space-between">
 						<h5 class="choose-image" style="cursor: pointer;margin:0;">Router</h5>
 					</div>
@@ -378,7 +378,7 @@
 									<div class="block clearfix">
 										<div class="i-checks mr30" style="width:100%;">
 											<span style="color:#000;" class="uk-flex uk-flex-middle"> 
-												<?php echo form_radio('publish', set_value('publish', 1), ((isset($_POST['publish']) && $_POST['publish'] == 1 || (isset($page['publish']) && $page['publish'] == 1)) ? true : (!isset($_POST['publish'])) ? true : false),'class=""  id="publish"  style="margin-top:0;margin-right:10px;" '); ?>
+												<?php echo form_radio('publish', set_value('publish', 1), ((isset($_POST['publish']) && $_POST['publish'] == 1 || (isset($page['publish']) && $page['publish'] == 1)) ? true : ((!isset($_POST['publish'])) ? true : false)),'class=""  id="publish"  style="margin-top:0;margin-right:10px;" '); ?>
 												<label for="publish" style="margin:0;cursor:pointer;"><?php echo translate('cms_lang.post.post_display_1', $language) ?></label>
 											</span>
 										</div>

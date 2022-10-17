@@ -5,11 +5,6 @@
     if(null !== show_flashdata()){
         $flash = show_flashdata();  
     }
-
-?>
-
-<?php 
-   
 ?>
 
 <?php if(isset($flash) && is_array($flash) && count($flash) && $flash['message'] != ''){ ?>

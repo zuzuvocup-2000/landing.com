@@ -2,9 +2,9 @@
 
 $('.login-form').validate({
     rules: {
-		phone: {
+		email: {
 			required: true,
-			minlength: 10
+			email: true
 		},
 		password: {
 			required: true,
@@ -12,9 +12,9 @@ $('.login-form').validate({
 		}
 	},
 	messages: {
-		phone: {
-			required: "Xin vui lòng nhập số điện thoại",
-			minlength: "Số điện thoại phải lớn hơn hoặc bằng 10 ký tự"
+		email: {
+			required: "Xin vui lòng nhập Email",
+			email: "Email không đúng định dạng"
 		},
 		password: {
 			required: "Xin vui lòng nhập mật khẩu",
@@ -31,7 +31,7 @@ $('.login-form').validate({
  	submitHandler: function(form) {
         let form_URL = 'ajax/frontend/auth/login';
         let data = {
-        	phone: $('.login-form').find('input[name="phone"]').val(),
+        	email: $('.login-form').find('input[name="email"]').val(),
         	password: $('.login-form').find('input[name="password"]').val(),
         }
         $('.hd-login').attr('disabled', 'disabled');

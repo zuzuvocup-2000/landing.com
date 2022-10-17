@@ -1138,3 +1138,118 @@ button:focus {
 #notelist{
     overflow-y: scroll;
 }
+
+
+.uk-flex-wrap{
+    flex-wrap: wrap;
+}
+/* custom-css */
+@media( max-width: 1025px ){
+  .mgcst{
+      margin-bottom: 10px !important;
+  }
+  .mg0cs{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+  .dpblock{
+      display: block !important;
+  }
+  .perpage select{
+    width: 200px !important;
+  }
+}
+@media( max-width: 769px ){
+    .wrap-table{
+        overflow-x:auto;
+    }
+
+    .width-table{
+        width: 1200px;
+    }
+
+  tr .btn {
+    width: 35px !important;
+    margin-right: 0 !important;
+  }
+}
+@media( max-width: 601px ){
+  .dpblock-2{
+    display: block !important;
+  }
+  .mgcst2{
+    margin-bottom: 10px !important;
+    margin-right: 0px !important;
+  }
+  .toolbox .btn-danger{
+    width: 163px;
+  }
+ /* .ibox-content table{
+    width: 320px;
+    height: 80px;
+    overflow: auto;
+  }*/
+  /* .table th:nth-child(4),
+  .table th:nth-child(5),
+  .table th:nth-child(6),
+  .table th:nth-child(7){
+    display: none;
+  }
+  .table td:nth-child(4),
+  .table td:nth-child(5),
+  .table td:nth-child(6),
+  .table td:nth-child(7){
+    display: none;
+  } */
+}
+@media( max-width: 415px ){
+  .dpblock-3{
+    display: block !important;
+  }
+  .mgcst3{
+    margin-bottom: 10px !important;
+  }
+ 
+  /* .table th:nth-child(8){
+    display: none;
+  } */
+  .mg0cs{
+    margin-bottom: 10px !important;
+  }
+  /* .table td:nth-child(8){
+    display: none;
+  } */
+  .perpage select {
+    width: 100% !important;
+  }
+  .cat-wrap .select2-container {
+    width: 100% !important;
+  }
+  .toolbox .btn-warning{
+    width: 317px;
+  }
+  .toolbox .btn-danger{
+    width: 317px;
+  }
+}
+
+@media (max-width: 768px){
+    .ibox-content .uk-flex{
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .uk-search,.uk-button, .cat-wrap ,.perpage{
+        margin-bottom: 10px
+    }
+    .cat-wrap{
+        width: 100%;
+    }
+
+    #page-wrapper{
+        padding: 0
+    }
+
+    .ibox-content .toolbox .uk-button{
+        text-align: center;
+    }
+}

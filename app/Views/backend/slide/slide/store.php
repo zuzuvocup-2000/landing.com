@@ -45,7 +45,7 @@ $language = $baseController->currentLanguage();
 											<span><?php echo translate('cms_lang.post_catalogue.postcat_description', $language) ?></span>
 										</label>
 									</div>
-									<?php echo form_textarea('description_catalogue', htmlspecialchars_decode(html_entity_decode(set_value('description_catalogue', (isset($slide_catalogue['description'])) ? $slide_catalogue['description'] : ''))), 'class="form-control" id="description" placeholder="" autocomplete="off"');?>
+									<?php echo form_textarea('description_catalogue', htmlspecialchars_decode(html_entity_decode(set_value('description_catalogue', (isset($slide_catalogue['description'])) ? $slide_catalogue['description'] : ''))), 'class="form-control ckeditor" id="description" placeholder="" autocomplete="off"');?>
 								</div>
 							</div>
 						</div>
@@ -121,7 +121,7 @@ $language = $baseController->currentLanguage();
 								<div class="block clearfix">
 									<div class="i-checks mr30" style="width:100%;">
 										<span style="color:#000;" class="uk-flex uk-flex-middle">
-											<?php echo form_radio('publish', set_value('publish', 1), ((isset($_POST['publish']) && $_POST['publish'] == 1 || (isset($article['publish']) && $article['publish'] == 1)) ? true : (!isset($_POST['publish'])) ? true : false),'class=""  id="publish"  style="margin-top:0;margin-right:10px;" '); ?>
+											<?php echo form_radio('publish', set_value('publish', 1), ((isset($_POST['publish']) && $_POST['publish'] == 1 || (isset($article['publish']) && $article['publish'] == 1)) ? true : (!isset($_POST['publish']) ? true : false)),'class=""  id="publish"  style="margin-top:0;margin-right:10px;" '); ?>
 											<label for="publish" style="margin:0;cursor:pointer;"><?php echo translate('cms_lang.slide.Selection3', $language) ?></label>
 										</span>
 									</div>
@@ -129,7 +129,7 @@ $language = $baseController->currentLanguage();
 								<div class="block clearfix">
 									<div class="i-checks" style="width:100%;">
 										<span style="color:#000;" class="uk-flex uk-flex-middle">
-											<?php echo form_radio('publish', set_value('publish', 0), ((isset($_POST['publish']) && $_POST['publish'] == 0 || (isset($article['publish']) && $article['publish'] == 0)) ? true : false),'class=""   id="no-publish" style="margin-top:0;margin-right:10px;" '); ?>
+											<?php echo form_radio('publish', set_value('publish', 0), ((isset($_POST['publish']) && $_POST['publish'] == 0 || (isset($article['publish']) && $article['publish'] == 0) ? true : false)),'class=""   id="no-publish" style="margin-top:0;margin-right:10px;" '); ?>
 											<label for="no-publish" style="margin:0;cursor:pointer;"><?php echo translate('cms_lang.slide.Selection4', $language) ?></label>
 										</span>
 									</div>

@@ -114,7 +114,7 @@
                 <?php } ?>
                 <?php if(in_array('backend/attribute/attribute/index', $permission) || in_array('backend/location/location/index', $permission) || in_array('backend/page/page/index', $permission)){ ?>
                 <li class="<?php echo ( $uriModule == 'attribute' || $uriModule == 'location'|| $uriModule == 'page') ? 'active'  : '' ?>">
-                    <a href="index.html"><i class="fa fa-info-circle" aria-hidden="true"></i> <span class="nav-label">QL Thông tin</span> <span class="fa arrow"></span></a>
+                    <a href="index.html"><i class="fa fa-briefcase" aria-hidden="true"></i> <span class="nav-label">QL Tuyển dụng</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <?php if(in_array('backend/attribute/catalogue/index', $permission)){ ?>
                             <li class="<?php echo ( $uriModule_name == 'attribute') ? 'active'  : '' ?>"><a href="<?php echo base_url('backend/attribute/attribute/index') ?>"><?php echo translate('cms_lang.sidebar.sb_attr', $language) ?></a></li>
@@ -122,8 +122,11 @@
                         <?php if(in_array('backend/location/location/index', $permission)){ ?>
                             <li class="<?php echo ( $uriModule_name == 'location') ? 'active'  : '' ?>"><a href="<?php echo base_url('backend/location/location/index') ?>"><?php echo translate('cms_lang.sidebar.sb_location', $language) ?></a></li>
                         <?php } ?>
+                        <?php if(in_array('backend/page/catalogue/index', $permission)){ ?>
+                            <li class="<?php echo ( $uriModule_name == 'catalogue') ? 'active'  : '' ?>"><a href="<?php echo base_url('backend/page/catalogue/index') ?>">QL Nhóm Tuyển dụng</a></li>
+                        <?php } ?>
                         <?php if(in_array('backend/page/page/index', $permission)){ ?>
-                            <li class="<?php echo ( $uriModule_name == 'page') ? 'active'  : '' ?>"><a href="<?php echo base_url('backend/page/page/index') ?>">QL page tĩnh</a></li>
+                            <li class="<?php echo ( $uriModule_name == 'page') ? 'active'  : '' ?>"><a href="<?php echo base_url('backend/page/page/index') ?>">QL Tuyển dụng</a></li>
                         <?php } ?>
                     </ul>
                 </li>

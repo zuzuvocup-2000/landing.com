@@ -26,11 +26,9 @@ $routes->get('doi-tac-khach-hang'.HTSUFFIX,'Frontend\Homepage\Home::customer');
  * Route Definitions
  * --------------------------------------------------------------------
  */
-
 $routes->get('/','Frontend\Homepage\Home::index');
 $routes->get('home.html','Frontend\Homepage\Home::index');
 $routes->get('trang-chu.html','Frontend\Homepage\Home::index');
-
 $routes->match(['get','post'],'dat-lich-tu-van'.HTSUFFIX, 'Frontend\Contact\Contact::datlich');
 $routes->match(['get','post'],'gio-hang'.HTSUFFIX, 'Frontend\Product\Cart::index');
 $routes->match(['get','post'],'dat-hang'.HTSUFFIX, 'Frontend\Product\Cart::pay');
@@ -41,11 +39,14 @@ $routes->get('thong-tin-don-hang'.HTSUFFIX, 'Frontend\Product\Cart::method');
 
 $routes->get('tag'.HTSUFFIX, 'Frontend\Tag\Tag::index');
 $routes->get('login'.HTSUFFIX, 'Frontend\Auth\Auth::login',['filter' => 'login_frontend' ]);
+$routes->get('login-gmail'.HTSUFFIX, 'Frontend\Auth\Gmail::login',['filter' => 'login_frontend' ]);
+$routes->get('login-facebook'.HTSUFFIX, 'Frontend\Auth\Fb::login',['filter' => 'login_frontend' ]);
 $routes->get('signup'.HTSUFFIX, 'Frontend\Auth\Auth::signup',['filter' => 'login_frontend' ]);
 $routes->get('forgot'.HTSUFFIX, 'Frontend\Auth\Auth::forgot');
 $routes->get('verify'.HTSUFFIX, 'Frontend\Auth\Auth::verify');
 $routes->get('thong-tin-chi-tiet'.HTSUFFIX, 'Frontend\Auth\DetailUser::index',['filter' => 'auth_frontend']);
-$routes->get('tai-khoan.html', 'Frontend\Auth\DetailUser::update',['filter' => 'auth_frontend']);
+$routes->post('cap-nhat-tai-khoan'.HTSUFFIX, 'Frontend\Auth\DetailUser::update',['filter' => 'auth_frontend']);
+$routes->post('cap-nhat-mat-khau'.HTSUFFIX, 'Frontend\Auth\DetailUser::change_pass',['filter' => 'auth_frontend']);
 $routes->get('don-hang-cua-toi.html', 'Frontend\Auth\DetailUser::bill',['filter' => 'auth_frontend']);
 $routes->get('logout'.HTSUFFIX, 'Frontend\Auth\Auth::logout',['filter' => 'auth_frontend' ]);
 
@@ -68,6 +69,11 @@ $routes->get(BACKEND_DIRECTORY, 'Backend/Authentication/Auth::login', ['filter' 
 $routes->get('backend/authentication/auth/forgot', 'Backend/Authentication/Auth::forgot', ['filter' => 'login' ]);
 $routes->get('backend/authentication/auth/logout', 'Backend/Authentication/Auth::logout', ['filter' => 'auth' ]);
 $routes->match(['get','post'],'backend/dashboard/dashboard/index', 'Backend/Dashboard/Dashboard::index', ['filter' => 'auth']);
+
+
+$routes->match(['get','post'],'backend/system/system/store', 'Backend/System/System::store', ['filter' => 'auth']);
+$routes->match(['get','post'],'backend/contact/contact/reply/([0-9]+)', 'Backend/Contact/Contact::reply', ['filter' => 'auth']);
+$routes->match(['get','post'],'/backend/user/profile/profile', 'Backend/User/Profile::profile', ['filter' => 'auth']);
 
 
 $name = [
@@ -186,3 +192,5 @@ if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
+
+

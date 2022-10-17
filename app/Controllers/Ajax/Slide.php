@@ -63,7 +63,7 @@ class Slide extends BaseController{
 		$data = json_decode(base64_decode($data),true);
         $APPPATH = substr(APPPATH, 0 ,-5);
         $targetPath = urldecode($APPPATH.$image);
-        $allowed = ['bmp','gif','jpeg','jpg','png', 'webp'];
+        $allowed = ['bmp','gif','jpeg','jpg','png', 'webp', 'svg'];
 		$ext = pathinfo($targetPath, PATHINFO_EXTENSION);
 		if (!in_array($ext, $allowed)) {
 		    $info = new \CodeIgniter\Files\File($targetPath);
@@ -90,6 +90,8 @@ class Slide extends BaseController{
 				'file_height' => $info->origHeight,
 			];
 		}
+
+
 		$properties = [];
 		if(isset($array) && is_array($array) && count($array)){
 			foreach ($array as $key => $value) {
@@ -99,15 +101,16 @@ class Slide extends BaseController{
 				];
 			}
 		}
+
 		echo json_encode([
 			'image' => $image,
 			'info' => $properties, 
 			'data' => [
-				'title' => $data['title'],
-				'canonical' => $data['canonical'],
-				'alt' => $data['alt'],
-				'description' => $data['description'],
-				'content' => $data['content'],
+				'title' => (isset($data['title']) ? $data['title'] : ''),
+				'canonical' => (isset($data['canonical']) ? $data['canonical'] : ''),
+				'alt' => (isset($data['alt']) ? $data['alt'] : ''),
+				'description' => (isset($data['description']) ? $data['description'] : ''),
+				'content' => (isset($data['content']) ? $data['content'] : ''),
 			]
 		]);die();
 	}

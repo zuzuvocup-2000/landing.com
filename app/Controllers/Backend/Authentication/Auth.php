@@ -31,38 +31,43 @@ class Auth extends BaseController{
 		 			'select' => 'id, fullname, email, (SELECT permission FROM user_catalogue WHERE user_catalogue.id = user.catalogueid) as permission',
 		 			'where' => ['email' => $this->request->getVar('email'),'deleted_at' => 0]
 		 		]);
-		 		$user['permission'] = json_decode($user['permission'],true);
-		 		$cookieAuth = [
-		 			'id' => $user['id'],
-		 			'fullname' => $user['fullname'],
-		 			'email' => $user['email'],
-		 			// 'permission' => base64_encode($user['permission']),
-		 		];
-		 		$permission = [];
-		 		$_SESSION['permission'] = $user['permission'];
-		 		if(isset($user['permission']) && is_array($user['permission']) && count($user['permission'])){
-		 			foreach ($user['permission'] as $value) {
-		 			    if($value == 'All' || $value == 'folderView' || $value == 'folderCreate' || $value == 'folderRename' || $value == 'folderDelete' || $value == 'fileView' || $value == 'fileUpload' || $value == 'fileRename' || $value == 'fileDelete'){
-		 			    	$permission[] = $value;
-		 			    }
-		 			}
-		 		}
+		 		if(!empty($user['permission'])){
+			 		$user['permission'] = json_decode($user['permission'],true);
+			 		$cookieAuth = [
+			 			'id' => $user['id'],
+			 			'fullname' => $user['fullname'],
+			 			'email' => $user['email'],
+			 			// 'permission' => base64_encode($user['permission']),
+			 		];
+			 		$permission = [];
+			 		$_SESSION['permission'] = $user['permission'];
+			 		if(isset($user['permission']) && is_array($user['permission']) && count($user['permission'])){
+			 			foreach ($user['permission'] as $value) {
+			 			    if($value == 'All' || $value == 'folderView' || $value == 'folderCreate' || $value == 'folderRename' || $value == 'folderDelete' || $value == 'fileView' || $value == 'fileUpload' || $value == 'fileRename' || $value == 'fileDelete'){
+			 			    	$permission[] = $value;
+			 			    }
+			 			}
+			 		}
 
-		 		setcookie(AUTH.'backend', json_encode($cookieAuth), time() + 1*24*3600, "/");
-		 		setcookie(AUTH.'permission', json_encode($permission), time() + 1*24*3600, "/");
-		 		$_update = [
-		 			'last_login' => gmdate('Y-m-d H:i:s', time() + 7*3600),
-					'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-					'remote_addr' => $_SERVER['REMOTE_ADDR']
-		 		];
-		 		$flag = $this->AutoloadModel->_update([
-		 			'table' => 'user',
-		 			'where' => ['id' => $user['id']],
-		 			'data' => $_update
-		 		]);
-		 		if($flag > 0){
-		 			$session->setFlashdata('message-success', 'Đăng nhập Thành Công');
-		 			return redirect()->to(BASE_URL.'backend/dashboard/dashboard/index');
+			 		setcookie(AUTH.'backend', json_encode($cookieAuth), time() + 1*24*3600, "/");
+			 		setcookie(AUTH.'permission', json_encode($permission), time() + 1*24*3600, "/");
+			 		$_update = [
+			 			'last_login' => gmdate('Y-m-d H:i:s', time() + 7*3600),
+						'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+						'remote_addr' => $_SERVER['REMOTE_ADDR']
+			 		];
+			 		$flag = $this->AutoloadModel->_update([
+			 			'table' => 'user',
+			 			'where' => ['id' => $user['id']],
+			 			'data' => $_update
+			 		]);
+			 		if($flag > 0){
+			 			$session->setFlashdata('message-success', 'Đăng nhập Thành Công');
+			 			return redirect()->to(BASE_URL.'backend/dashboard/dashboard/index');
+			 		}
+		 		}else{
+		 			$session->setFlashdata('message-danger', 'Có lỗi xảy ra');
+		 			return redirect()->to(BASE_URL.'admin');
 		 		}
 	        }else{
 	        	$this->data['validate'] = $this->validator->listErrors();

@@ -6,12 +6,12 @@ $languageList = get_list_language(['currentLanguage' => $language]);
 ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-        <h2>Quản lý Nhóm Page tĩnh</h2>
+        <h2>Quản lý Nhóm Tuyển dụng</h2>
         <ol class="breadcrumb" style="margin-bottom:10px;">
             <li>
                 <a href="<?php echo base_url('backend/dashboard/dashboard/index') ?>"><?php echo translate('cms_lang.post_catalogue.postcat_home', $language) ?></a>
             </li>
-            <li class="active"><strong>Quản lý Nhóm Page tĩnh</strong></li>
+            <li class="active"><strong>Quản lý Nhóm Tuyển dụng</strong></li>
         </ol>
     </div>
 </div>
@@ -20,7 +20,7 @@ $languageList = get_list_language(['currentLanguage' => $language]);
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Quản lý Nhóm Page tĩnh </h5>
+                    <h5>Quản lý Nhóm Tuyển dụng </h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
